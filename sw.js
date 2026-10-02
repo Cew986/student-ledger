@@ -3,7 +3,7 @@
    2) 导航请求：先返回缓存秒开，后台静默更新（下次打开生效）
    3) 拦截 Web Share Target 的 POST，把账单文件暂存到 IndexedDB 后跳转导入页
 */
-const VERSION = '2026.10.01a';
+const VERSION = '2026.10.02a';
 const CACHE = 'ledger-' + VERSION;
 const SHELL = [
   './',

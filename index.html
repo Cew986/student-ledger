@@ -393,11 +393,14 @@ async function saveTransaction(t) {
 }
 
 async function monthExpenses(month) {
-  const rows = await getIdx('transactions', 'by_month_ex', IDBKeyRange.bound(month + '|0', month + '|1'));
+  /* 上界必须是 month+'|0'（不含 |1）。原先写成 bound(month+'|0', month+'|1')
+     会把「不计入预算」的记录一并算进来，导致 spent / remain / byCat / perDay
+     与 todaySpent 全部偏大。month_ex 只有 |0 / |1 两个取值，用 only 最稳妥。 */
+  const rows = await getIdx('transactions', 'by_month_ex', IDBKeyRange.only(month + '|0'));
   return rows.filter(r => r.direction === 'expense');
 }
 async function monthExcluded(month) {
-  const rows = await getIdx('transactions', 'by_month_ex', IDBKeyRange.bound(month + '|1', month + '|1'));
+  const rows = await getIdx('transactions', 'by_month_ex', IDBKeyRange.only(month + '|1'));
   return rows.filter(r => r.direction === 'expense');
 }
 async function monthAdds(month) {
@@ -718,12 +721,22 @@ async function renderList() {
   }
   if (!list.length) { h += '<div class="empty">没有符合条件的记录</div>'; document.getElementById('page-list').innerHTML = h; return; }
 
+  // 每日剩余预算：按整月「计入预算」的支出逐日累计，不受下列分类 / 搜索筛选影响
+  const ms = await monthSummary(state.viewMonth);
+  const daySpend = new Map();
+  for (const r of ms.exps) daySpend.set(r.date, (daySpend.get(r.date) || 0) + r.amountCents);
+  const remainSeq = [];
+  let cum = 0;
+  for (const d0 of [...daySpend.keys()].sort()) { cum += daySpend.get(d0); remainSeq.push([d0, ms.totalBudget - cum]); }
+  const remainOn = date => { let v = ms.totalBudget; for (const [d0, v0] of remainSeq) { if (d0 <= date) v = v0; else break; } return v; };
+
   const byDate = new Map();
   for (const t of list) { if (!byDate.has(t.date)) byDate.set(t.date, []); byDate.get(t.date).push(t); }
   h += '<div class="list">';
   for (const [d, arr] of byDate) {
-    const sum = arr.filter(t => t.direction === 'expense').reduce((s, t) => s + t.amountCents, 0);
-    h += '<div class="dayhead"><span>' + d.slice(5) + ' ' + weekday(d) + '</span><span class="num">支出 ¥' + yuan(sum) + '</span></div>';
+    const sum = arr.filter(t => t.direction === 'expense').reduce((a, t) => a + t.amountCents, 0);
+    const rem = remainOn(d);
+    h += '<div class="dayhead"><span>' + d.slice(5) + ' ' + weekday(d) + '</span><span class="num">支出 ¥' + yuan(sum) + ' · 剩 <span style="color:' + (rem < 0 ? 'var(--danger-dark)' : 'inherit') + '">¥' + yuan(rem) + '</span></span></div>';
     for (const t of arr) h += txnRow(t);
   }
   h += '</div>';
@@ -1395,7 +1408,7 @@ window.addEventListener('pageshow', checkDayRollover);
 setInterval(checkDayRollover, 60000);
 
 /* ============================ Service Worker ============================ */
-const APP_VERSION = '2026.10.01a';
+const APP_VERSION = '2026.10.02a';
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(reg => {
     reg.addEventListener('updatefound', () => {
