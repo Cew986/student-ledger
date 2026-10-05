@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-CN" data-theme="system">
+<!DOCTYPE html> //是一个文档类型说明，告诉浏览器用HTML5形式解析
+<html lang="zh-CN" data-theme="system">//lang是告诉页面用什么语言，data-theme是
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -464,40 +464,40 @@ function parseCsvRows(text) {
   const rows = []; let row = []; let cur = ''; let inQ = false;
   for (let i = 0; i < text.length; i++) {
     const c = text[i];
-    if (inQ) {
-      if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false; }
+    if (inQ) {                  //“===”是严格相等，数据类型和值都要相等
+      if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false; }    //如果后面一个也是"，就将"加到cur后面，否则就继续后面判断
       else cur += c;
     } else if (c === '"') inQ = true;
-    else if (c === ',') { row.push(cur); cur = ''; }
-    else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }
-    else if (c !== '\r') cur += c;
+    else if (c === ',') { row.push(cur); cur = ''; }    //“push”是在尾部添加元素，如果读到","就把cur添加到row后面，再初始化cur
+    else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }     //如果读到换行，就把cur添加到row后面，再把row添加到rows后面，再初始化row和cur，所以rows是一个二位数组
+    else if (c !== '\r') cur += c;      //\r是回车符，把光标移至行首，读到\r就什么都不做
   }
   if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
-  return rows.filter(r => r.some(c => String(c).trim() !== ''));
-}
+  return rows.filter(r => r.some(c => String(c).trim() !== ''));                //filter，筛选；some，看有无，返回bool；String，变为字符串；trim，去掉首尾空白；
+}                                                                               //rows是二维数组，遍历每一行，然后如果是空行就舍弃。
 /* 去零宽/空白 + 全角括号半角化 + 去掉括号后缀（微信表头是「金额(元)」，要归一成「金额」） */
-const norm = s => String(s == null ? '' : s)
-  .replace(/[\uFEFF\u200B\s]/g, '')
-  .replace(/（/g, '(').replace(/）/g, ')')
-  .replace(/\([^)]*\)/g, '');
+const norm = s => String(s == null ? '' : s)                //s=null时改成空，如果不这样就会出现null。
+  .replace(/[\uFEFF\u200B\s]/g, '')                         //匹配所以BOM,零宽空格和所有空白字符的正则，然后删除
+  .replace(/（/g, '(').replace(/）/g, ')')                   //全角括号半角化
+  .replace(/\([^)]*\)/g, '');                               //正则里，()是分组元字符，所以要匹配就要加\,[...]是字符类，^表示取反，*表示匹配0个或多个
 const WX_HEAD = ['交易时间', '交易类型', '交易对方', '商品', '收/支', '金额', '支付方式', '当前状态', '交易单号', '商户单号', '备注'];
 const ALI_HEAD = ['交易时间', '交易分类', '交易对方', '对方账号', '商品说明', '收/支', '金额', '收/付款方式', '交易状态', '交易订单号', '商家订单号', '备注'];
 const WX_ONLY = ['支付方式', '交易类型', '商户单号'];
 const ALI_ONLY = ['交易分类', '对方账号', '商家订单号', '收/付款方式'];
 function findHeader(rows) {
-  const lim = Math.min(rows.length, 60);
+  const lim = Math.min(rows.length, 60);                //Math.min，取最小值
   for (let i = 0; i < lim; i++) {
-    const set = new Set(rows[i].map(norm));
-    if (!set.has('交易时间') || !set.has('金额') || !set.has('收/支')) continue;
-    const wx = WX_ONLY.filter(h => set.has(h)).length;
-    const ali = ALI_ONLY.filter(h => set.has(h)).length;
+    const set = new Set(rows[i].map(norm));             //new+构造函数，用来创建对象；map,来加工数组对象，必须要有返回；norm是一个函数，见255行；Set,是一个自带的集合，这样能自动去重
+    if (!set.has('交易时间') || !set.has('金额') || !set.has('收/支')) continue;      //has,判断有没有
+    const wx = WX_ONLY.filter(h => set.has(h)).length;              //看看WX_ONLY里有几个是set也含有的
+    const ali = ALI_ONLY.filter(h => set.has(h)).length;            //看看ALI_ONLY里有几个是set也含有的
     let source;
-    if (ali && !wx) source = 'alipay';
-    else if (wx && !ali) source = 'wechat';
+    if (ali && !wx) source = 'alipay';                              //wx=0，且ali!=0的时候，source='alipay'
+    else if (wx && !ali) source = 'wechat';                         //ali=0,且wx!=0的时候,source='wechat'
     else source = (ALI_HEAD.filter(h => set.has(h)).length > WX_HEAD.filter(h => set.has(h)).length) ? 'alipay' : 'wechat';
     const map = {};
-    rows[i].forEach((cell, idx) => { const n = norm(cell); if (n) map[n] = idx; });
-    return { headerIndex: i, source: source, map: map };
+    rows[i].forEach((cell, idx) => { const n = norm(cell); if (n) map[n] = idx; });         //forEach遍历每一个
+    return { headerIndex: i, source: source, map: map };            //返回一个集合，序号，来源，map
   }
   return null;
 }
@@ -532,10 +532,16 @@ function makeDedupKey(t) {
   return [t.source, t.ts, t.amountCents, String(t.counterparty || '').trim()].join('|');
 }
 function parseBillText(text, items) {
-  const rows = parseCsvRows(text);
-  const head = findHeader(rows);
-  if (!head) { const e = new Error('NOT_BILL_CSV'); e.code = 'NOT_BILL_CSV'; throw e; }
-  const F = FIELD_MAP[head.source];
+  const rows = parseCsvRows(text);              //读取出text中有效行。见239行，//返回的是rows
+  const head = findHeader(rows);                //读取rows中每个来源（支付宝/微信）见263行，//返回一个集合，序号，来源，map
+  if (!head) { const e = new Error('NOT_BILL_CSV'); e.code = 'NOT_BILL_CSV'; throw e; }     //head为0，Error,专门用来表示程序出错了，包含message(错误信息),name(类型名),stack(出错位置的调用堆栈)；throw,主动抛出错误，中断程序
+  const F = FIELD_MAP[head.source];             //FIELD_MAP见280行，给F赋值（字典）
+         /*这里get是一个函数：从行 r 里取出字段 f 对应的值
+         F[f]
+         wechat: { time: '交易时间', type: '交易类型', counterparty: '交易对方', product: '商品', dir: '收/支', amount: '金额', pay: '支付方式', status: '当前状态', orderNo: '交易单号', merchantNo: '商户单号', note: '备注' },
+         alipay: { time: '交易时间', type: '交易分类', counterparty: '交易对方', product: '商品说明', dir: '收/支', amount: '金额', pay: '收/付款方式', status: '交易状态', orderNo: '交易订单号', merchantNo: '商家订单号', note: '备注' }
+         F是二选一
+         */
   const get = (r, f) => (head.map[F[f]] != null ? (r[head.map[F[f]]] == null ? '' : r[head.map[F[f]]]) : '');
   const out = [], filtered = [];
   for (let i = head.headerIndex + 1; i < rows.length; i++) {
@@ -1408,7 +1414,7 @@ window.addEventListener('pageshow', checkDayRollover);
 setInterval(checkDayRollover, 60000);
 
 /* ============================ Service Worker ============================ */
-const APP_VERSION = '2026.10.02a';
+const APP_VERSION = '2026.10.05a';
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then(reg => {
     reg.addEventListener('updatefound', () => {
