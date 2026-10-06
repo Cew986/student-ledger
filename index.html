@@ -1,13 +1,15 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
+<!-- æ˜¯ä¸€ä¸ªæ–‡æ¡£ç±»å‹è¯´æ˜ï¼Œå‘Šè¯‰æµè§ˆå™¨ç”¨HTML5å½¢å¼è§£æ -->
+<!-- langæ˜¯å‘Šè¯‰é¡µé¢ç”¨ä»€ä¹ˆè¯­è¨€ï¼Œdata-themeæ˜¯ -->
 <html lang="zh-CN" data-theme="system">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Éú»î·Ñ¼ÇÕË</title>
+<title>ç”Ÿæ´»è´¹è®°è´¦</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <meta name="theme-color" content="#3b82f6">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="¼ÇÕË">
+<meta name="apple-mobile-web-app-title" content="è®°è´¦">
 <link rel="icon" href="./icons/icon-192.png">
 <style>
 :root{
@@ -141,84 +143,84 @@ hr{border:0;border-top:0.5px solid var(--line);margin:12px 0}
 </main>
 
 <nav id="tabbar">
-  <a href="#/home" data-tab="home"><span class="ico"></span>Ê×Ò³</a>
-  <a href="#/list" data-tab="list"><span class="ico"></span>Ã÷Ï¸</a>
-  <a href="#/stats" data-tab="stats"><span class="ico"></span>Í³¼Æ</a>
-  <a href="#/settings" data-tab="settings"><span class="ico"></span>ÉèÖÃ</a>
+  <a href="#/home" data-tab="home"><span class="ico"></span>é¦–é¡µ</a>
+  <a href="#/list" data-tab="list"><span class="ico"></span>æ˜ç»†</a>
+  <a href="#/stats" data-tab="stats"><span class="ico"></span>ç»Ÿè®¡</a>
+  <a href="#/settings" data-tab="settings"><span class="ico"></span>è®¾ç½®</a>
 </nav>
-<button id="fab" aria-label="¼ÇÒ»±Ê">+</button>
+<button id="fab" aria-label="è®°ä¸€ç¬”">+</button>
 
 <div id="sheets">
   <div class="sheetmask" id="mask"></div>
 
   <div class="sheet" id="sheet-add">
-    <h2>¼ÇÒ»±Ê</h2>
+    <h2>è®°ä¸€ç¬”</h2>
     <div class="seg" style="margin-bottom:12px">
-      <button id="add-dir-expense" class="on">Ö§³ö</button>
-      <button id="add-dir-income">ÊÕÈë</button>
+      <button id="add-dir-expense" class="on">æ”¯å‡º</button>
+      <button id="add-dir-income">æ”¶å…¥</button>
     </div>
-    <div class="field"><label>½ğ¶î</label>
-      <div class="row"><span style="font-size:20px;color:var(--sub)">?</span>
+    <div class="field"><label>é‡‘é¢</label>
+      <div class="row"><span style="font-size:20px;color:var(--sub)">Â¥</span>
       <input id="add-amount" class="amt" inputmode="decimal" placeholder="0.00" style="border:0;background:transparent;padding:0;min-height:44px"></div>
     </div>
-    <div class="field"><label>·ÖÀà</label><div class="catgrid" id="add-cats"></div></div>
-    <div class="field"><label>ÈÕÆÚ</label><input id="add-date" type="date"></div>
-    <div class="field"><label>±¸×¢</label><input id="add-note" placeholder="Ñ¡Ìî"></div>
+    <div class="field"><label>åˆ†ç±»</label><div class="catgrid" id="add-cats"></div></div>
+    <div class="field"><label>æ—¥æœŸ</label><input id="add-date" type="date"></div>
+    <div class="field"><label>å¤‡æ³¨</label><input id="add-note" placeholder="é€‰å¡«"></div>
     <div class="row" style="margin-bottom:14px">
       <button class="sw" id="add-exclude"></button>
-      <span style="font-size:13px">²»¼ÆÈë±¾ÔÂÔ¤Ëã</span>
-      <span class="hint grow">ÂòµçÄÔ¡¢»úÆ±µÈ´ó¶î</span>
+      <span style="font-size:13px">ä¸è®¡å…¥æœ¬æœˆé¢„ç®—</span>
+      <span class="hint grow">ä¹°ç”µè„‘ã€æœºç¥¨ç­‰å¤§é¢</span>
     </div>
-    <div class="row"><button class="btn block" id="add-cancel">È¡Ïû</button><button class="btn primary block" id="add-save">±£´æ</button></div>
+    <div class="row"><button class="btn block" id="add-cancel">å–æ¶ˆ</button><button class="btn primary block" id="add-save">ä¿å­˜</button></div>
   </div>
 
   <div class="sheet" id="sheet-item">
-    <h2 id="item-title">ĞÂÔöÔ¤ËãÏî</h2>
+    <h2 id="item-title">æ–°å¢é¢„ç®—é¡¹</h2>
     <input type="hidden" id="item-id">
-    <div class="field"><label>Ãû³Æ</label><input id="item-name" placeholder="Èç Ë®¹û"></div>
-    <div class="field"><label>¹Ø¼ü×Ö£¨ÃüÖĞ¼´¹éÈë¸Ã·ÖÀà£©</label>
-      <div class="row"><input id="item-kw" placeholder="Èç °Ù¹ûÔ°"><button class="btn sm" id="item-kw-add">Ìí¼Ó</button></div>
+    <div class="field"><label>åç§°</label><input id="item-name" placeholder="å¦‚ æ°´æœ"></div>
+    <div class="field"><label>å…³é”®å­—ï¼ˆå‘½ä¸­å³å½’å…¥è¯¥åˆ†ç±»ï¼‰</label>
+      <div class="row"><input id="item-kw" placeholder="å¦‚ ç™¾æœå›­"><button class="btn sm" id="item-kw-add">æ·»åŠ </button></div>
       <div class="kws" id="item-kws"></div>
     </div>
-    <div class="field"><label>ÔÂÔ¤Ëã£¨Ôª£©</label><input id="item-amount" inputmode="decimal" placeholder="0.00"></div>
-    <div class="field"><label>ÑÕÉ«</label><div class="row" id="item-colors"></div></div>
+    <div class="field"><label>æœˆé¢„ç®—ï¼ˆå…ƒï¼‰</label><input id="item-amount" inputmode="decimal" placeholder="0.00"></div>
+    <div class="field"><label>é¢œè‰²</label><div class="row" id="item-colors"></div></div>
     <div class="row" style="margin-bottom:14px">
-      <button class="sw" id="item-default"></button><span style="font-size:13px">ÉèÎªÄ¬ÈÏÔ¤ËãÏî</span>
+      <button class="sw" id="item-default"></button><span style="font-size:13px">è®¾ä¸ºé»˜è®¤é¢„ç®—é¡¹</span>
     </div>
-    <div class="row"><button class="btn block" id="item-cancel">È¡Ïû</button><button class="btn primary block" id="item-save">±£´æ</button></div>
+    <div class="row"><button class="btn block" id="item-cancel">å–æ¶ˆ</button><button class="btn primary block" id="item-save">ä¿å­˜</button></div>
   </div>
 
   <div class="sheet" id="sheet-addbudget">
-    <h2>×·¼ÓÔ¤Ëã</h2>
-    <div class="field"><label>½ğ¶î£¨Ôª£©</label><input id="ab-amount" inputmode="decimal" placeholder="0.00"></div>
-    <div class="field"><label>À´Ô´</label><select id="ab-source">
-      <option>¸¸Ä¸×·¼Ó</option><option>±¨Ïúµ½ÕË</option><option>¼æÖ°½±Ñ§½ğ</option><option>×Ô¼º²¹</option><option>ÆäËû</option>
+    <h2>è¿½åŠ é¢„ç®—</h2>
+    <div class="field"><label>é‡‘é¢ï¼ˆå…ƒï¼‰</label><input id="ab-amount" inputmode="decimal" placeholder="0.00"></div>
+    <div class="field"><label>æ¥æº</label><select id="ab-source">
+      <option>çˆ¶æ¯è¿½åŠ </option><option>æŠ¥é”€åˆ°è´¦</option><option>å…¼èŒå¥–å­¦é‡‘</option><option>è‡ªå·±è¡¥</option><option>å…¶ä»–</option>
     </select></div>
-    <div class="field"><label>±¸×¢</label><input id="ab-note" placeholder="Ñ¡Ìî£¬Èç µçÄÔ±¨Ïú"></div>
-    <div class="row"><button class="btn block" id="ab-cancel">È¡Ïû</button><button class="btn primary block" id="ab-save">±£´æ</button></div>
+    <div class="field"><label>å¤‡æ³¨</label><input id="ab-note" placeholder="é€‰å¡«ï¼Œå¦‚ ç”µè„‘æŠ¥é”€"></div>
+    <div class="row"><button class="btn block" id="ab-cancel">å–æ¶ˆ</button><button class="btn primary block" id="ab-save">ä¿å­˜</button></div>
   </div>
 
   <div class="sheet" id="sheet-import">
-    <h2>µ¼ÈëÔ¤ÀÀ</h2>
+    <h2>å¯¼å…¥é¢„è§ˆ</h2>
     <div id="imp-body"></div>
-    <div class="row" style="margin-top:12px"><button class="btn block" id="imp-cancel">È¡Ïû</button><button class="btn primary block" id="imp-confirm">È·ÈÏµ¼Èë</button></div>
+    <div class="row" style="margin-top:12px"><button class="btn block" id="imp-cancel">å–æ¶ˆ</button><button class="btn primary block" id="imp-confirm">ç¡®è®¤å¯¼å…¥</button></div>
   </div>
 
   <div class="sheet" id="sheet-txn">
-    <h2>½»Ò×ÏêÇé</h2>
+    <h2>äº¤æ˜“è¯¦æƒ…</h2>
     <div id="txn-body"></div>
     <div class="row" style="margin-top:12px">
-      <button class="btn block" id="txn-del" style="color:var(--danger-dark)">É¾³ı</button>
-      <button class="btn block" id="txn-toggle">ÇĞ»»²»Õ¼Ô¤Ëã</button>
-      <button class="btn primary block" id="txn-close">¹Ø±Õ</button>
+      <button class="btn block" id="txn-del" style="color:var(--danger-dark)">åˆ é™¤</button>
+      <button class="btn block" id="txn-toggle">åˆ‡æ¢ä¸å é¢„ç®—</button>
+      <button class="btn primary block" id="txn-close">å…³é—­</button>
     </div>
   </div>
 
   <div class="sheet" id="sheet-firstrun">
-    <h2>ÏÈÉèÒ»ÏÂÃ¿ÔÂÉú»î·Ñ</h2>
-    <div class="field"><label>¸¸Ä¸Ã¿ÔÂ¸ø¶àÉÙ£¨Ôª£©</label><input id="fr-amount" inputmode="decimal" value="2400"></div>
+    <h2>å…ˆè®¾ä¸€ä¸‹æ¯æœˆç”Ÿæ´»è´¹</h2>
+    <div class="field"><label>çˆ¶æ¯æ¯æœˆç»™å¤šå°‘ï¼ˆå…ƒï¼‰</label><input id="fr-amount" inputmode="decimal" value="2400"></div>
     <p class="muted" id="fr-preview"></p>
-    <button class="btn primary block" id="fr-save">¿ªÊ¼Ê¹ÓÃ</button>
+    <button class="btn primary block" id="fr-save">å¼€å§‹ä½¿ç”¨</button>
   </div>
 </div>
 
@@ -228,10 +230,10 @@ hr{border:0;border-top:0.5px solid var(--line);margin:12px 0}
 
 <script>
 "use strict";
-/* ============================ ¹¤¾ß ============================ */
-const pad = n => String(n).padStart(2, '0');        //padStart()£¬ÔÚ¿ªÍ·ÓÃ0²¹ÆëÖÁ2Î»
-const ymd = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());    //»ñµÃÄê-ÔÂ-ÈÕ
-const ym = d => d.getFullYear() + '-' + pad(d.getMonth() + 1);          //»ñµÃÄê-ÔÂ
+/* ============================ å·¥å…· ============================ */
+const pad = n => String(n).padStart(2, '0');        //padStart()ï¼Œåœ¨å¼€å¤´ç”¨0è¡¥é½è‡³2ä½
+const ymd = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());    //è·å¾—å¹´-æœˆ-æ—¥
+const ym = d => d.getFullYear() + '-' + pad(d.getMonth() + 1);          //è·å¾—å¹´-æœˆ
 const daysInMonth = (y, m) => new Date(y, m, 0).getDate();
 const uid = () => (crypto.randomUUID ? crypto.randomUUID() : 'x' + Date.now() + Math.random().toString(16).slice(2));
 const todayStr = () => ymd(new Date());
@@ -239,20 +241,20 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&a
 const yuan = c => (c / 100).toFixed(2);
 const yuanT = c => (c / 100).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const parseYuan = s => {
-  const t = String(s == null ? '' : s).replace(/[,£¬\s?£¤Ôª]/g, '').trim();
+  const t = String(s == null ? '' : s).replace(/[,ï¼Œ\sÂ¥ï¿¥å…ƒ]/g, '').trim();
   if (!t) return null;
   if (!/^-?\d+(\.\d{0,2})?$/.test(t)) return null;
   return Math.round(parseFloat(t) * 100);
 };
-const monthLabel = m => { const p = m.split('-'); return p[0] + ' Äê ' + Number(p[1]) + ' ÔÂ'; };
+const monthLabel = m => { const p = m.split('-'); return p[0] + ' å¹´ ' + Number(p[1]) + ' æœˆ'; };
 const shiftMonth = (m, d) => {
   const p = m.split('-').map(Number);
   const dt = new Date(p[0], p[1] - 1 + d, 1);
   return ym(dt);
 };
-const weekday = ds => { const d = new Date(ds.slice(0, 4), +ds.slice(5, 7) - 1, ds.slice(8, 10)); return 'ÖÜ' + 'ÈÕÒ»¶şÈıËÄÎåÁù'[d.getDay()]; };
+const weekday = ds => { const d = new Date(ds.slice(0, 4), +ds.slice(5, 7) - 1, ds.slice(8, 10)); return 'å‘¨' + 'æ—¥ä¸€äºŒä¸‰å››äº”å…­'[d.getDay()]; };
 
-/* ============================ Êı¾İ¿â ============================ */
+/* ============================ æ•°æ®åº“ ============================ */
 const DB_NAME = 'pocket-ledger', DB_VERSION = 1;
 let _db = null;
 function openDB() {
@@ -305,18 +307,18 @@ async function bulkPut(n, arr) {
 const getSetting = async (k, d) => { const r = await getOne('settings', k); return r === undefined ? d : r.value; };
 const setSetting = (k, v) => putRec('settings', { key: k, value: v });
 
-/* ============================ Ä¬ÈÏÄ£°å ============================ */
+/* ============================ é»˜è®¤æ¨¡æ¿ ============================ */
 const OTHER_ID = 'other';
 const PALETTE = ['#f59e0b', '#22c55e', '#3b82f6', '#8b5cf6', '#ec4899', '#14b8a6', '#ef4444', '#6b7280'];
 const DEFAULT_TEMPLATE = [
-  { name: '²ÍÒû', keywords: ['Ê³ÌÃ', 'ÃÀÍÅ', '¶öÁËÃ´', '²ÍÒû', '²ÍÌü', '¿ì²Í', 'ÍâÂô', 'Ãæ¹İ', 'ÉÕ¿¾', '»ğ¹ø', 'ÃÀÊ³'], amount: 1100, color: '#f59e0b' },
-  { name: 'Ë®¹û', keywords: ['Ë®¹û', '¹ûÇĞ', '°Ù¹ûÔ°', 'ÏÊ¹û', '¹ûÔ°'], amount: 100, color: '#22c55e' },
-  { name: '»°·Ñ', keywords: ['ÖĞ¹úÒÆ¶¯', 'ÖĞ¹úÁªÍ¨', 'ÖĞ¹úµçĞÅ', '»°·Ñ', 'Á÷Á¿', '¿í´ø', 'Ğ£Ô°Íø'], amount: 120, color: '#14b8a6' },
-  { name: '½»Í¨', keywords: ['µÎµÎ', 'µØÌú', '¹«½»', '¹ìµÀ½»Í¨', '12306', 'ÌúÂ·', '¸ßÌú', 'µ¥³µ', '¹ş†ª', 'Çà½Û', '´ò³µ', '¼ÓÓÍ', 'Í£³µ'], amount: 120, color: '#3b82f6' },
-  { name: 'ÈÕÓÃ°Ù»õ', keywords: ['³¬ÊĞ', '±ãÀûµê', 'ÂŞÉ­', 'È«¼Ò', 'ÃÀÒË¼Ñ', 'ÓÀ»Ô', 'ºĞÂí', 'ÈÕÓÃ', '²ËÄñ', '¿ìµİ', '·á³²', 'Ï´»¤'], amount: 150, color: '#8b5cf6' },
-  { name: 'Ñ§Ï°', keywords: ['½Ì²Ä', 'Í¼Êé', 'ĞÂ»ªÊéµê', '´òÓ¡', 'ÎÄÓ¡', '¸´Ó¡', 'Ñ§·Ñ', 'Íø¿Î', '¿Î³Ì', '¿¼ÊÔ', '±¨Ãû·Ñ', 'ÖªÍø'], amount: 150, color: '#6366f1' },
-  { name: 'ÓéÀÖÉç½»', keywords: ['µçÓ°', 'Ó°Ôº', 'KTV', 'ÓÎÏ·', 'Steam', 'ÌÚÑ¶ÊÓÆµ', '°®ÆæÒÕ', 'BÕ¾', '»áÔ±', 'ÒôÀÖ', 'Ñİ³ö', '¾ç±¾É±', 'ºì°ü', 'ÀñÎï'], amount: 280, color: '#ec4899' },
-  { name: '»ú¶¯', keywords: ['Ò½Ôº', 'Ò©µê', 'ÕïËù', 'Ìå¼ì', '¹ÒºÅ', 'Ò½ÁÆ'], amount: 380, color: '#6b7280' }
+  { name: 'é¤é¥®', keywords: ['é£Ÿå ‚', 'ç¾å›¢', 'é¥¿äº†ä¹ˆ', 'é¤é¥®', 'é¤å…', 'å¿«é¤', 'å¤–å–', 'é¢é¦†', 'çƒ§çƒ¤', 'ç«é”…', 'ç¾é£Ÿ'], amount: 1100, color: '#f59e0b' },
+  { name: 'æ°´æœ', keywords: ['æ°´æœ', 'æœåˆ‡', 'ç™¾æœå›­', 'é²œæœ', 'æœå›­'], amount: 100, color: '#22c55e' },
+  { name: 'è¯è´¹', keywords: ['ä¸­å›½ç§»åŠ¨', 'ä¸­å›½è”é€š', 'ä¸­å›½ç”µä¿¡', 'è¯è´¹', 'æµé‡', 'å®½å¸¦', 'æ ¡å›­ç½‘'], amount: 120, color: '#14b8a6' },
+  { name: 'äº¤é€š', keywords: ['æ»´æ»´', 'åœ°é“', 'å…¬äº¤', 'è½¨é“äº¤é€š', '12306', 'é“è·¯', 'é«˜é“', 'å•è½¦', 'å“ˆå•°', 'é’æ¡”', 'æ‰“è½¦', 'åŠ æ²¹', 'åœè½¦'], amount: 120, color: '#3b82f6' },
+  { name: 'æ—¥ç”¨ç™¾è´§', keywords: ['è¶…å¸‚', 'ä¾¿åˆ©åº—', 'ç½—æ£®', 'å…¨å®¶', 'ç¾å®œä½³', 'æ°¸è¾‰', 'ç›’é©¬', 'æ—¥ç”¨', 'èœé¸Ÿ', 'å¿«é€’', 'ä¸°å·¢', 'æ´—æŠ¤'], amount: 150, color: '#8b5cf6' },
+  { name: 'å­¦ä¹ ', keywords: ['æ•™æ', 'å›¾ä¹¦', 'æ–°åä¹¦åº—', 'æ‰“å°', 'æ–‡å°', 'å¤å°', 'å­¦è´¹', 'ç½‘è¯¾', 'è¯¾ç¨‹', 'è€ƒè¯•', 'æŠ¥åè´¹', 'çŸ¥ç½‘'], amount: 150, color: '#6366f1' },
+  { name: 'å¨±ä¹ç¤¾äº¤', keywords: ['ç”µå½±', 'å½±é™¢', 'KTV', 'æ¸¸æˆ', 'Steam', 'è…¾è®¯è§†é¢‘', 'çˆ±å¥‡è‰º', 'Bç«™', 'ä¼šå‘˜', 'éŸ³ä¹', 'æ¼”å‡º', 'å‰§æœ¬æ€', 'çº¢åŒ…', 'ç¤¼ç‰©'], amount: 280, color: '#ec4899' },
+  { name: 'æœºåŠ¨', keywords: ['åŒ»é™¢', 'è¯åº—', 'è¯Šæ‰€', 'ä½“æ£€', 'æŒ‚å·', 'åŒ»ç–—'], amount: 380, color: '#6b7280' }
 ];
 const DEFAULT_TOTAL = DEFAULT_TEMPLATE.reduce((s, x) => s + x.amount, 0); // 2400
 
@@ -343,7 +345,7 @@ async function restoreTemplate() {
   await bulkPut('budgetItems', items);
 }
 
-/* ============================ ¹éÀàÓë¼ÆËã ============================ */
+/* ============================ å½’ç±»ä¸è®¡ç®— ============================ */
 const state = { viewMonth: ym(new Date()), items: [], filter: { cat: '', q: '', onlyEx: 0 }, imp: null };
 
 async function loadItems() {
@@ -352,7 +354,7 @@ async function loadItems() {
   return state.items;
 }
 const itemById = id => state.items.find(x => x.id === id);
-const itemName = id => (id === OTHER_ID ? 'ÆäËû' : (itemById(id) ? itemById(id).name : 'ÒÑÉ¾³ı·ÖÀà'));
+const itemName = id => (id === OTHER_ID ? 'å…¶ä»–' : (itemById(id) ? itemById(id).name : 'å·²åˆ é™¤åˆ†ç±»'));
 const itemColor = id => (id === OTHER_ID ? '#9e9e9e' : (itemById(id) ? itemById(id).color : '#9e9e9e'));
 
 function categoryOf(t, items) {
@@ -377,10 +379,10 @@ async function recategorize(scope) {
     if (c !== t.categoryId) { t.categoryId = c; t.updatedAt = Date.now(); upd.push(t); n++; }
   }
   if (upd.length) await bulkPut('transactions', upd);
-  toast(n ? 'ÒÑÖØĞÂ¹éÀà ' + n + ' ±Ê' : 'Ã»ÓĞĞèÒªµ÷ÕûµÄ¼ÇÂ¼');
+  toast(n ? 'å·²é‡æ–°å½’ç±» ' + n + ' ç¬”' : 'æ²¡æœ‰éœ€è¦è°ƒæ•´çš„è®°å½•');
   renderAll();
 }
-/* ÓÉ date Óë excludeFromBudget ÅÉÉú¸´ºÏË÷Òı¼ü£»ËùÓĞĞ´¿âÂ·¾¶¶¼±ØĞë¾­¹ıËü */
+/* ç”± date ä¸ excludeFromBudget æ´¾ç”Ÿå¤åˆç´¢å¼•é”®ï¼›æ‰€æœ‰å†™åº“è·¯å¾„éƒ½å¿…é¡»ç»è¿‡å®ƒ */
 function withIndexKeys(t) {
   t.month = String(t.date).slice(0, 7);
   t.month_ex = t.month + '|' + (t.excludeFromBudget ? 1 : 0);
@@ -393,9 +395,9 @@ async function saveTransaction(t) {
 }
 
 async function monthExpenses(month) {
-  /* ÉÏ½ç±ØĞëÊÇ month+'|0'£¨²»º¬ |1£©¡£Ô­ÏÈĞ´³É bound(month+'|0', month+'|1')
-     »á°Ñ¡¸²»¼ÆÈëÔ¤Ëã¡¹µÄ¼ÇÂ¼Ò»²¢Ëã½øÀ´£¬µ¼ÖÂ spent / remain / byCat / perDay
-     Óë todaySpent È«²¿Æ«´ó¡£month_ex Ö»ÓĞ |0 / |1 Á½¸öÈ¡Öµ£¬ÓÃ only ×îÎÈÍ×¡£ */
+  /* ä¸Šç•Œå¿…é¡»æ˜¯ month+'|0'ï¼ˆä¸å« |1ï¼‰ã€‚åŸå…ˆå†™æˆ bound(month+'|0', month+'|1')
+     ä¼šæŠŠã€Œä¸è®¡å…¥é¢„ç®—ã€çš„è®°å½•ä¸€å¹¶ç®—è¿›æ¥ï¼Œå¯¼è‡´ spent / remain / byCat / perDay
+     ä¸ todaySpent å…¨éƒ¨åå¤§ã€‚month_ex åªæœ‰ |0 / |1 ä¸¤ä¸ªå–å€¼ï¼Œç”¨ only æœ€ç¨³å¦¥ã€‚ */
   const rows = await getIdx('transactions', 'by_month_ex', IDBKeyRange.only(month + '|0'));
   return rows.filter(r => r.direction === 'expense');
 }
@@ -427,9 +429,9 @@ async function monthSummary(month) {
   const daysLeft = isCurrent ? dim - now.getDate() + 1 : 0;
   const todaySpent = isCurrent ? exps.filter(r => r.date === todayStr()).reduce((s, r) => s + r.amountCents, 0) : 0;
   const ideal = isCurrent ? (now.getDate() - 1 + now.getHours() / 24) / dim : 1;
-  /* ¡¸½ñÈÕ»¹ÄÜ»¨¡¹= ½ñÈÕÓ¦µÃµÄÈÕ¾ù¶î¶È ? ½ñÈÕÒÑ»¨¡£
-     remain ÒÑ¿Ûµô½ñÈÕÒÑ»¨£¬¹ÊÏÈ»¹Ô­½ñÈÕ¿ª¾Ö¶î¶È (remain + todaySpent) ÔÙ°´Ê£ÓàÌìÊı(º¬½ñÌì)¾ùÌ¯£¬
-     ÔÙ¼õÈ¥½ñÈÕÒÑ»¨£»½ñÈÕÒÑ³¬ÈÕ¾ùÊ±ÓÃ Math.max ¶µµ×£¬±ÜÃâ³öÏÖ¸ºÊı¡£ */
+  /* ã€Œä»Šæ—¥è¿˜èƒ½èŠ±ã€= ä»Šæ—¥åº”å¾—çš„æ—¥å‡é¢åº¦ âˆ’ ä»Šæ—¥å·²èŠ±ã€‚
+     remain å·²æ‰£æ‰ä»Šæ—¥å·²èŠ±ï¼Œæ•…å…ˆè¿˜åŸä»Šæ—¥å¼€å±€é¢åº¦ (remain + todaySpent) å†æŒ‰å‰©ä½™å¤©æ•°(å«ä»Šå¤©)å‡æ‘Šï¼Œ
+     å†å‡å»ä»Šæ—¥å·²èŠ±ï¼›ä»Šæ—¥å·²è¶…æ—¥å‡æ—¶ç”¨ Math.max å…œåº•ï¼Œé¿å…å‡ºç°è´Ÿæ•°ã€‚ */
   const perDay = (isCurrent && daysLeft > 0 && remain > 0)
     ? Math.max(0, Math.floor((remain + todaySpent) / daysLeft - todaySpent))
     : 0;
@@ -445,7 +447,7 @@ const levelOf = (used, budget) => {
   return 'good';
 };
 
-/* ============================ CSV ½âÎö£¨´¿º¯Êı£© ============================ */
+/* ============================ CSV è§£æï¼ˆçº¯å‡½æ•°ï¼‰ ============================ */
 /* ===== PURE-START ===== */
 function decodeSmart(buf) {
   const u8 = new Uint8Array(buf);
@@ -456,7 +458,7 @@ function decodeSmart(buf) {
   try {
     const s = new TextDecoder('utf-8', { fatal: true }).decode(buf.slice(off));
     if (s.indexOf('\uFFFD') < 0) return s;
-  } catch (e) { /* ·Ç·¨ UTF-8£¬»ØÍË GBK */ }
+  } catch (e) { /* éæ³• UTF-8ï¼Œå›é€€ GBK */ }
   try { return new TextDecoder('gbk').decode(buf.slice(off)); }
   catch (e) { return new TextDecoder('utf-8').decode(buf.slice(off)); }
 }
@@ -464,67 +466,67 @@ function parseCsvRows(text) {
   const rows = []; let row = []; let cur = ''; let inQ = false;
   for (let i = 0; i < text.length; i++) {
     const c = text[i];
-    if (inQ) {                  //¡°===¡±ÊÇÑÏ¸ñÏàµÈ£¬Êı¾İÀàĞÍºÍÖµ¶¼ÒªÏàµÈ
-      if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false; }    //Èç¹ûºóÃæÒ»¸öÒ²ÊÇ"£¬¾Í½«"¼Óµ½curºóÃæ£¬·ñÔò¾Í¼ÌĞøºóÃæÅĞ¶Ï
+    if (inQ) {                  //â€œ===â€æ˜¯ä¸¥æ ¼ç›¸ç­‰ï¼Œæ•°æ®ç±»å‹å’Œå€¼éƒ½è¦ç›¸ç­‰
+      if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else inQ = false; }    //å¦‚æœåé¢ä¸€ä¸ªä¹Ÿæ˜¯"ï¼Œå°±å°†"åŠ åˆ°curåé¢ï¼Œå¦åˆ™å°±ç»§ç»­åé¢åˆ¤æ–­
       else cur += c;
     } else if (c === '"') inQ = true;
-    else if (c === ',') { row.push(cur); cur = ''; }    //¡°push¡±ÊÇÔÚÎ²²¿Ìí¼ÓÔªËØ£¬Èç¹û¶Áµ½","¾Í°ÑcurÌí¼Óµ½rowºóÃæ£¬ÔÙ³õÊ¼»¯cur
-    else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }     //Èç¹û¶Áµ½»»ĞĞ£¬¾Í°ÑcurÌí¼Óµ½rowºóÃæ£¬ÔÙ°ÑrowÌí¼Óµ½rowsºóÃæ£¬ÔÙ³õÊ¼»¯rowºÍcur£¬ËùÒÔrowsÊÇÒ»¸ö¶şÎ»Êı×é
-    else if (c !== '\r') cur += c;      //\rÊÇ»Ø³µ·û£¬°Ñ¹â±êÒÆÖÁĞĞÊ×£¬¶Áµ½\r¾ÍÊ²Ã´¶¼²»×ö
+    else if (c === ',') { row.push(cur); cur = ''; }    //â€œpushâ€æ˜¯åœ¨å°¾éƒ¨æ·»åŠ å…ƒç´ ï¼Œå¦‚æœè¯»åˆ°","å°±æŠŠcuræ·»åŠ åˆ°rowåé¢ï¼Œå†åˆå§‹åŒ–cur
+    else if (c === '\n') { row.push(cur); rows.push(row); row = []; cur = ''; }     //å¦‚æœè¯»åˆ°æ¢è¡Œï¼Œå°±æŠŠcuræ·»åŠ åˆ°rowåé¢ï¼Œå†æŠŠrowæ·»åŠ åˆ°rowsåé¢ï¼Œå†åˆå§‹åŒ–rowå’Œcurï¼Œæ‰€ä»¥rowsæ˜¯ä¸€ä¸ªäºŒä½æ•°ç»„
+    else if (c !== '\r') cur += c;      //\ræ˜¯å›è½¦ç¬¦ï¼ŒæŠŠå…‰æ ‡ç§»è‡³è¡Œé¦–ï¼Œè¯»åˆ°\rå°±ä»€ä¹ˆéƒ½ä¸åš
   }
   if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
-  return rows.filter(r => r.some(c => String(c).trim() !== ''));                //filter£¬É¸Ñ¡£»some£¬¿´ÓĞÎŞ£¬·µ»Øbool£»String£¬±äÎª×Ö·û´®£»trim£¬È¥µôÊ×Î²¿Õ°×£»
-}                                                                               //rowsÊÇ¶şÎ¬Êı×é£¬±éÀúÃ¿Ò»ĞĞ£¬È»ºóÈç¹ûÊÇ¿ÕĞĞ¾ÍÉáÆú¡£
-/* È¥Áã¿í/¿Õ°× + È«½ÇÀ¨ºÅ°ë½Ç»¯ + È¥µôÀ¨ºÅºó×º£¨Î¢ĞÅ±íÍ·ÊÇ¡¸½ğ¶î(Ôª)¡¹£¬Òª¹éÒ»³É¡¸½ğ¶î¡¹£© */
-const norm = s => String(s == null ? '' : s)                //s=nullÊ±¸Ä³É¿Õ£¬Èç¹û²»ÕâÑù¾Í»á³öÏÖnull¡£
-  .replace(/[\uFEFF\u200B\s]/g, '')                         //Æ¥ÅäËùÒÔBOM,Áã¿í¿Õ¸ñºÍËùÓĞ¿Õ°××Ö·ûµÄÕıÔò£¬È»ºóÉ¾³ı
-  .replace(/£¨/g, '(').replace(/£©/g, ')')                   //È«½ÇÀ¨ºÅ°ë½Ç»¯
-  .replace(/\([^)]*\)/g, '');                               //ÕıÔòÀï£¬()ÊÇ·Ö×éÔª×Ö·û£¬ËùÒÔÒªÆ¥Åä¾ÍÒª¼Ó\,[...]ÊÇ×Ö·ûÀà£¬^±íÊ¾È¡·´£¬*±íÊ¾Æ¥Åä0¸ö»ò¶à¸ö
-const WX_HEAD = ['½»Ò×Ê±¼ä', '½»Ò×ÀàĞÍ', '½»Ò×¶Ô·½', 'ÉÌÆ·', 'ÊÕ/Ö§', '½ğ¶î', 'Ö§¸¶·½Ê½', 'µ±Ç°×´Ì¬', '½»Ò×µ¥ºÅ', 'ÉÌ»§µ¥ºÅ', '±¸×¢'];
-const ALI_HEAD = ['½»Ò×Ê±¼ä', '½»Ò×·ÖÀà', '½»Ò×¶Ô·½', '¶Ô·½ÕËºÅ', 'ÉÌÆ·ËµÃ÷', 'ÊÕ/Ö§', '½ğ¶î', 'ÊÕ/¸¶¿î·½Ê½', '½»Ò××´Ì¬', '½»Ò×¶©µ¥ºÅ', 'ÉÌ¼Ò¶©µ¥ºÅ', '±¸×¢'];
-const WX_ONLY = ['Ö§¸¶·½Ê½', '½»Ò×ÀàĞÍ', 'ÉÌ»§µ¥ºÅ'];
-const ALI_ONLY = ['½»Ò×·ÖÀà', '¶Ô·½ÕËºÅ', 'ÉÌ¼Ò¶©µ¥ºÅ', 'ÊÕ/¸¶¿î·½Ê½'];
+  return rows.filter(r => r.some(c => String(c).trim() !== ''));                //filterï¼Œç­›é€‰ï¼›someï¼Œçœ‹æœ‰æ— ï¼Œè¿”å›boolï¼›Stringï¼Œå˜ä¸ºå­—ç¬¦ä¸²ï¼›trimï¼Œå»æ‰é¦–å°¾ç©ºç™½ï¼›
+}                                                                               //rowsæ˜¯äºŒç»´æ•°ç»„ï¼Œéå†æ¯ä¸€è¡Œï¼Œç„¶åå¦‚æœæ˜¯ç©ºè¡Œå°±èˆå¼ƒã€‚
+/* å»é›¶å®½/ç©ºç™½ + å…¨è§’æ‹¬å·åŠè§’åŒ– + å»æ‰æ‹¬å·åç¼€ï¼ˆå¾®ä¿¡è¡¨å¤´æ˜¯ã€Œé‡‘é¢(å…ƒ)ã€ï¼Œè¦å½’ä¸€æˆã€Œé‡‘é¢ã€ï¼‰ */
+const norm = s => String(s == null ? '' : s)                //s=nullæ—¶æ”¹æˆç©ºï¼Œå¦‚æœä¸è¿™æ ·å°±ä¼šå‡ºç°nullã€‚
+  .replace(/[\uFEFF\u200B\s]/g, '')                         //åŒ¹é…æ‰€ä»¥BOM,é›¶å®½ç©ºæ ¼å’Œæ‰€æœ‰ç©ºç™½å­—ç¬¦çš„æ­£åˆ™ï¼Œç„¶ååˆ é™¤
+  .replace(/ï¼ˆ/g, '(').replace(/ï¼‰/g, ')')                   //å…¨è§’æ‹¬å·åŠè§’åŒ–
+  .replace(/\([^)]*\)/g, '');                               //æ­£åˆ™é‡Œï¼Œ()æ˜¯åˆ†ç»„å…ƒå­—ç¬¦ï¼Œæ‰€ä»¥è¦åŒ¹é…å°±è¦åŠ \,[...]æ˜¯å­—ç¬¦ç±»ï¼Œ^è¡¨ç¤ºå–åï¼Œ*è¡¨ç¤ºåŒ¹é…0ä¸ªæˆ–å¤šä¸ª
+const WX_HEAD = ['äº¤æ˜“æ—¶é—´', 'äº¤æ˜“ç±»å‹', 'äº¤æ˜“å¯¹æ–¹', 'å•†å“', 'æ”¶/æ”¯', 'é‡‘é¢', 'æ”¯ä»˜æ–¹å¼', 'å½“å‰çŠ¶æ€', 'äº¤æ˜“å•å·', 'å•†æˆ·å•å·', 'å¤‡æ³¨'];
+const ALI_HEAD = ['äº¤æ˜“æ—¶é—´', 'äº¤æ˜“åˆ†ç±»', 'äº¤æ˜“å¯¹æ–¹', 'å¯¹æ–¹è´¦å·', 'å•†å“è¯´æ˜', 'æ”¶/æ”¯', 'é‡‘é¢', 'æ”¶/ä»˜æ¬¾æ–¹å¼', 'äº¤æ˜“çŠ¶æ€', 'äº¤æ˜“è®¢å•å·', 'å•†å®¶è®¢å•å·', 'å¤‡æ³¨'];
+const WX_ONLY = ['æ”¯ä»˜æ–¹å¼', 'äº¤æ˜“ç±»å‹', 'å•†æˆ·å•å·'];
+const ALI_ONLY = ['äº¤æ˜“åˆ†ç±»', 'å¯¹æ–¹è´¦å·', 'å•†å®¶è®¢å•å·', 'æ”¶/ä»˜æ¬¾æ–¹å¼'];
 function findHeader(rows) {
-  const lim = Math.min(rows.length, 60);                //Math.min£¬È¡×îĞ¡Öµ
+  const lim = Math.min(rows.length, 60);                //Math.minï¼Œå–æœ€å°å€¼
   for (let i = 0; i < lim; i++) {
-    const set = new Set(rows[i].map(norm));             //new+¹¹Ôìº¯Êı£¬ÓÃÀ´´´½¨¶ÔÏó£»map,À´¼Ó¹¤Êı×é¶ÔÏó£¬±ØĞëÒªÓĞ·µ»Ø£»normÊÇÒ»¸öº¯Êı£¬¼û255ĞĞ£»Set,ÊÇÒ»¸ö×Ô´øµÄ¼¯ºÏ£¬ÕâÑùÄÜ×Ô¶¯È¥ÖØ
-    if (!set.has('½»Ò×Ê±¼ä') || !set.has('½ğ¶î') || !set.has('ÊÕ/Ö§')) continue;      //has,ÅĞ¶ÏÓĞÃ»ÓĞ
-    const wx = WX_ONLY.filter(h => set.has(h)).length;              //¿´µ±Ç°ĞĞÃüÖĞÁË¼¸¸öÎ¢ĞÅÌØÓĞ±íÍ·
-    const ali = ALI_ONLY.filter(h => set.has(h)).length;            //¿´µ±Ç°ĞĞÃüÖĞÁË¼¸¸öÖ§¸¶±¦ÌØÓĞ±íÍ·
+    const set = new Set(rows[i].map(norm));             //new+æ„é€ å‡½æ•°ï¼Œç”¨æ¥åˆ›å»ºå¯¹è±¡ï¼›map,æ¥åŠ å·¥æ•°ç»„å¯¹è±¡ï¼Œå¿…é¡»è¦æœ‰è¿”å›ï¼›normæ˜¯ä¸€ä¸ªå‡½æ•°ï¼Œè§255è¡Œï¼›Set,æ˜¯ä¸€ä¸ªè‡ªå¸¦çš„é›†åˆï¼Œè¿™æ ·èƒ½è‡ªåŠ¨å»é‡
+    if (!set.has('äº¤æ˜“æ—¶é—´') || !set.has('é‡‘é¢') || !set.has('æ”¶/æ”¯')) continue;      //has,åˆ¤æ–­æœ‰æ²¡æœ‰
+    const wx = WX_ONLY.filter(h => set.has(h)).length;              //çœ‹å½“å‰è¡Œå‘½ä¸­äº†å‡ ä¸ªå¾®ä¿¡ç‰¹æœ‰è¡¨å¤´
+    const ali = ALI_ONLY.filter(h => set.has(h)).length;            //çœ‹å½“å‰è¡Œå‘½ä¸­äº†å‡ ä¸ªæ”¯ä»˜å®ç‰¹æœ‰è¡¨å¤´
     let source;
-    if (ali && !wx) source = 'alipay';                              //wx=0£¬ÇÒali!=0µÄÊ±ºò£¬source='alipay'
-    else if (wx && !ali) source = 'wechat';                         //ali=0,ÇÒwx!=0µÄÊ±ºò,source='wechat'
+    if (ali && !wx) source = 'alipay';                              //wx=0ï¼Œä¸”ali!=0çš„æ—¶å€™ï¼Œsource='alipay'
+    else if (wx && !ali) source = 'wechat';                         //ali=0,ä¸”wx!=0çš„æ—¶å€™,source='wechat'
     else source = (ALI_HEAD.filter(h => set.has(h)).length > WX_HEAD.filter(h => set.has(h)).length) ? 'alipay' : 'wechat';
-    const map = {};                                               //´´½¨ÁĞË÷Òı
-    rows[i].forEach((cell, idx) => { const n = norm(cell); if (n) map[n] = idx; });         //forEach±éÀúÃ¿Ò»¸ö£¬Èç¹ûcell£¨µ±Ç°µ¥Ôª¸ñ£©²»ÊÇ¿Õ£¬¾ÍÔÚmapÀï¸øµ±Ç°µ¥Ôª¸ñ¼ü¸³Öµidx£¨´Ó0¿ªÊ¼£©¡£
-    return { headerIndex: i, source: source, map: map };            //·µ»ØÒ»¸ö¼¯ºÏ£¬±íÍ·ËùÔÚĞĞ£¬À´Ô´£¬ÁĞË÷Òı
+    const map = {};                                               //åˆ›å»ºåˆ—ç´¢å¼•
+    rows[i].forEach((cell, idx) => { const n = norm(cell); if (n) map[n] = idx; });         //forEachéå†æ¯ä¸€ä¸ªï¼Œå¦‚æœcellï¼ˆå½“å‰å•å…ƒæ ¼ï¼‰ä¸æ˜¯ç©ºï¼Œå°±åœ¨mapé‡Œç»™å½“å‰å•å…ƒæ ¼é”®èµ‹å€¼idxï¼ˆä»0å¼€å§‹ï¼‰ã€‚
+    return { headerIndex: i, source: source, map: map };            //è¿”å›ä¸€ä¸ªé›†åˆï¼Œè¡¨å¤´æ‰€åœ¨è¡Œï¼Œæ¥æºï¼Œåˆ—ç´¢å¼•
   }
   return null;
 }
 const FIELD_MAP = {
-  wechat: { time: '½»Ò×Ê±¼ä', type: '½»Ò×ÀàĞÍ', counterparty: '½»Ò×¶Ô·½', product: 'ÉÌÆ·', dir: 'ÊÕ/Ö§', amount: '½ğ¶î', pay: 'Ö§¸¶·½Ê½', status: 'µ±Ç°×´Ì¬', orderNo: '½»Ò×µ¥ºÅ', merchantNo: 'ÉÌ»§µ¥ºÅ', note: '±¸×¢' },
-  alipay: { time: '½»Ò×Ê±¼ä', type: '½»Ò×·ÖÀà', counterparty: '½»Ò×¶Ô·½', product: 'ÉÌÆ·ËµÃ÷', dir: 'ÊÕ/Ö§', amount: '½ğ¶î', pay: 'ÊÕ/¸¶¿î·½Ê½', status: '½»Ò××´Ì¬', orderNo: '½»Ò×¶©µ¥ºÅ', merchantNo: 'ÉÌ¼Ò¶©µ¥ºÅ', note: '±¸×¢' }
+  wechat: { time: 'äº¤æ˜“æ—¶é—´', type: 'äº¤æ˜“ç±»å‹', counterparty: 'äº¤æ˜“å¯¹æ–¹', product: 'å•†å“', dir: 'æ”¶/æ”¯', amount: 'é‡‘é¢', pay: 'æ”¯ä»˜æ–¹å¼', status: 'å½“å‰çŠ¶æ€', orderNo: 'äº¤æ˜“å•å·', merchantNo: 'å•†æˆ·å•å·', note: 'å¤‡æ³¨' },
+  alipay: { time: 'äº¤æ˜“æ—¶é—´', type: 'äº¤æ˜“åˆ†ç±»', counterparty: 'äº¤æ˜“å¯¹æ–¹', product: 'å•†å“è¯´æ˜', dir: 'æ”¶/æ”¯', amount: 'é‡‘é¢', pay: 'æ”¶/ä»˜æ¬¾æ–¹å¼', status: 'äº¤æ˜“çŠ¶æ€', orderNo: 'äº¤æ˜“è®¢å•å·', merchantNo: 'å•†å®¶è®¢å•å·', note: 'å¤‡æ³¨' }
 };
 const EXCLUDE_STATUS = {
-  wechat: ['ÒÑÈ«¶îÍË¿î', 'ÒÑÍË¿î', '²¿·ÖÍË¿î', 'ÌáÏÖÒÑµ½ÕË', 'ÒÑ´æÈëÁãÇ®', '½»Ò×¹Ø±Õ', '³äÖµÍê³É', 'ÒÑ½â¶³', 'ÒÑ²ğ·ÖÍË¿î'],
-  alipay: ['½»Ò×¹Ø±Õ', 'ÍË¿î³É¹¦', '½â¶³³É¹¦', '¶³½á³É¹¦', 'ÒÑÍË¿î', '»¹¿î³É¹¦', '³äÖµ³É¹¦', 'ÌáÏÖ³É¹¦', 'ÒÑ½â¶³', '×Ê½ğÍË»Ø']
+  wechat: ['å·²å…¨é¢é€€æ¬¾', 'å·²é€€æ¬¾', 'éƒ¨åˆ†é€€æ¬¾', 'æç°å·²åˆ°è´¦', 'å·²å­˜å…¥é›¶é’±', 'äº¤æ˜“å…³é—­', 'å……å€¼å®Œæˆ', 'å·²è§£å†»', 'å·²æ‹†åˆ†é€€æ¬¾'],
+  alipay: ['äº¤æ˜“å…³é—­', 'é€€æ¬¾æˆåŠŸ', 'è§£å†»æˆåŠŸ', 'å†»ç»“æˆåŠŸ', 'å·²é€€æ¬¾', 'è¿˜æ¬¾æˆåŠŸ', 'å……å€¼æˆåŠŸ', 'æç°æˆåŠŸ', 'å·²è§£å†»', 'èµ„é‡‘é€€å›']
 };
 function isExcludedStatus(source, status) {
-  const s = String(status == null ? '' : status).trim();            //È¡³ö×´Ì¬£¬²¢ÇåÀí->s
+  const s = String(status == null ? '' : status).trim();            //å–å‡ºçŠ¶æ€ï¼Œå¹¶æ¸…ç†->s
   if (!s) return false;
-  return EXCLUDE_STATUS[source].some(k => s.indexOf(k) >= 0);           //È¥¶ÁsÀïÃæÓĞÃ»ÓĞk£¨kÊÇ¿ÉÄÜĞèÒªÅÅ³ı»òÕßÌØÊâ´¦ÀíµÄ×´Ì¬£©£¬ÓĞ·µ»Øtrue,·ñÔò·µ»Øfalse,
+  return EXCLUDE_STATUS[source].some(k => s.indexOf(k) >= 0);           //å»è¯»sé‡Œé¢æœ‰æ²¡æœ‰kï¼ˆkæ˜¯å¯èƒ½éœ€è¦æ’é™¤æˆ–è€…ç‰¹æ®Šå¤„ç†çš„çŠ¶æ€ï¼‰ï¼Œæœ‰è¿”å›true,å¦åˆ™è¿”å›false,
 }
 function parseAmountCents(raw) {
-  const t = String(raw == null ? '' : raw).replace(/[?£¤,\sÔª]/g, '').trim();
+  const t = String(raw == null ? '' : raw).replace(/[Â¥ï¿¥,\så…ƒ]/g, '').trim();
   if (!t) return null;
-  if (!/^-?\d+(\.\d{1,2})?$/.test(t)) return null;      //^£¬´ÓÍ·¿ªÊ¼Æ¥Åä;-?£¬¿ÉÑ¡µÄ¸ººÅ;\d+£¬ÖÁÉÙÒ»Î»Êı×Ö;(\.\d{1,2})?£¬¿ÉÑ¡µÄĞ¡Êıµã¼ÓÒ»µ½Á½Î»Êı×Ö;$£¬Æ¥Åäµ½½áÎ²           .test(t)£¬·µ»ØboolÖµ
-  return Math.round(parseFloat(t) * 100);               //parseFloat,°Ñ×Ö·û´®×ª³É¸¡µãÊı£»Math.round()£¬ËÄÉáÎåÈë³ÉÕûÊı
+  if (!/^-?\d+(\.\d{1,2})?$/.test(t)) return null;      //^ï¼Œä»å¤´å¼€å§‹åŒ¹é…;-?ï¼Œå¯é€‰çš„è´Ÿå·;\d+ï¼Œè‡³å°‘ä¸€ä½æ•°å­—;(\.\d{1,2})?ï¼Œå¯é€‰çš„å°æ•°ç‚¹åŠ ä¸€åˆ°ä¸¤ä½æ•°å­—;$ï¼ŒåŒ¹é…åˆ°ç»“å°¾           .test(t)ï¼Œè¿”å›boolå€¼
+  return Math.round(parseFloat(t) * 100);               //parseFloat,æŠŠå­—ç¬¦ä¸²è½¬æˆæµ®ç‚¹æ•°ï¼›Math.round()ï¼Œå››èˆäº”å…¥æˆæ•´æ•°
 }
 function parseTime(raw) {
-  const m = String(raw == null ? '' : raw).trim().match(/(\d{4})[-\/Äê](\d{1,2})[-\/ÔÂ](\d{1,2})ÈÕ?[\sT]*(?:(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?/);        //.match,×Ö·û´®Àï²éÕÒ·ûºÏ¸ñÊ½µÄÕıÔòÄÚÈİ£¬ÕÒµ½·µ»ØÒ»¸öÊı×é£¬·ñÔònull
+  const m = String(raw == null ? '' : raw).trim().match(/(\d{4})[-\/å¹´](\d{1,2})[-\/æœˆ](\d{1,2})æ—¥?[\sT]*(?:(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?/);        //.match,å­—ç¬¦ä¸²é‡ŒæŸ¥æ‰¾ç¬¦åˆæ ¼å¼çš„æ­£åˆ™å†…å®¹ï¼Œæ‰¾åˆ°è¿”å›ä¸€ä¸ªæ•°ç»„ï¼Œå¦åˆ™null
   if (!m) return null;
-  const dt = new Date(+m[1], +m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0));       //+£¬Ò»Ôª¼ÓºÅ£¬°Ñ×Ö·û´®×ª³ÉÊı×Ö£»¶ÔÏóDateÀïÔÂ·İ´Ó0¿ªÊ¼¼ÇÂ¼£¬ËùÒÔÒª¼õÒ»£»
-  return { ts: dt.getTime(), date: ymd(dt), month: ym(dt) };             //·µ»Ø£¬ts,ºÁÃëÊ±¼ä´Á;date£¬ÈÕÆÚ;month£¬ÔÂ·İ
+  const dt = new Date(+m[1], +m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0));       //+ï¼Œä¸€å…ƒåŠ å·ï¼ŒæŠŠå­—ç¬¦ä¸²è½¬æˆæ•°å­—ï¼›å¯¹è±¡Dateé‡Œæœˆä»½ä»0å¼€å§‹è®°å½•ï¼Œæ‰€ä»¥è¦å‡ä¸€ï¼›
+  return { ts: dt.getTime(), date: ymd(dt), month: ym(dt) };             //è¿”å›ï¼Œts,æ¯«ç§’æ—¶é—´æˆ³;dateï¼Œæ—¥æœŸ;monthï¼Œæœˆä»½
 }
 function makeDedupKey(t) {
   const on = String(t.orderNo || '').trim();
@@ -532,36 +534,36 @@ function makeDedupKey(t) {
   return [t.source, t.ts, t.amountCents, String(t.counterparty || '').trim()].join('|');
 }
 function parseBillText(text, items) {
-  const rows = parseCsvRows(text);              //¶ÁÈ¡³ötextÖĞÓĞĞ§ĞĞ¡£¼û239ĞĞ£¬//·µ»ØµÄÊÇrows
-  const head = findHeader(rows);                //¶ÁÈ¡rowsÖĞÃ¿¸öÀ´Ô´£¨Ö§¸¶±¦/Î¢ĞÅ£©¼û263ĞĞ£¬//·µ»ØÒ»¸ö¼¯ºÏ£¬ĞòºÅ£¬À´Ô´£¬map
-  if (!head) { const e = new Error('NOT_BILL_CSV'); e.code = 'NOT_BILL_CSV'; throw e; }     //headÎª0£¬Error,×¨ÃÅÓÃÀ´±íÊ¾³ÌĞò³ö´íÁË£¬°üº¬message(´íÎóĞÅÏ¢),name(ÀàĞÍÃû),stack(³ö´íÎ»ÖÃµÄµ÷ÓÃ¶ÑÕ»)£»throw,Ö÷¶¯Å×³ö´íÎó£¬ÖĞ¶Ï³ÌĞò
-  const F = FIELD_MAP[head.source];             //FIELD_MAP¼û280ĞĞ£¬¸øF¸³Öµ£¨×Öµä£©
-         /*ÕâÀïgetÊÇÒ»¸öº¯Êı£º´ÓĞĞ r ÀïÈ¡³ö×Ö¶Î f ¶ÔÓ¦µÄÖµ
+  const rows = parseCsvRows(text);              //è¯»å–å‡ºtextä¸­æœ‰æ•ˆè¡Œã€‚è§239è¡Œï¼Œ//è¿”å›çš„æ˜¯rows
+  const head = findHeader(rows);                //è¯»å–rowsä¸­æ¯ä¸ªæ¥æºï¼ˆæ”¯ä»˜å®/å¾®ä¿¡ï¼‰è§263è¡Œï¼Œ//è¿”å›ä¸€ä¸ªé›†åˆï¼Œåºå·ï¼Œæ¥æºï¼Œmap
+  if (!head) { const e = new Error('NOT_BILL_CSV'); e.code = 'NOT_BILL_CSV'; throw e; }     //headä¸º0ï¼ŒError,ä¸“é—¨ç”¨æ¥è¡¨ç¤ºç¨‹åºå‡ºé”™äº†ï¼ŒåŒ…å«message(é”™è¯¯ä¿¡æ¯),name(ç±»å‹å),stack(å‡ºé”™ä½ç½®çš„è°ƒç”¨å †æ ˆ)ï¼›throw,ä¸»åŠ¨æŠ›å‡ºé”™è¯¯ï¼Œä¸­æ–­ç¨‹åº
+  const F = FIELD_MAP[head.source];             //FIELD_MAPè§280è¡Œï¼Œç»™Fèµ‹å€¼ï¼ˆå­—å…¸ï¼‰
+         /*è¿™é‡Œgetæ˜¯ä¸€ä¸ªå‡½æ•°ï¼šä»è¡Œ r é‡Œå–å‡ºå­—æ®µ f å¯¹åº”çš„å€¼
          F[f]
-         wechat: { time: '½»Ò×Ê±¼ä', type: '½»Ò×ÀàĞÍ', counterparty: '½»Ò×¶Ô·½', product: 'ÉÌÆ·', dir: 'ÊÕ/Ö§', amount: '½ğ¶î', pay: 'Ö§¸¶·½Ê½', status: 'µ±Ç°×´Ì¬', orderNo: '½»Ò×µ¥ºÅ', merchantNo: 'ÉÌ»§µ¥ºÅ', note: '±¸×¢' },
-         alipay: { time: '½»Ò×Ê±¼ä', type: '½»Ò×·ÖÀà', counterparty: '½»Ò×¶Ô·½', product: 'ÉÌÆ·ËµÃ÷', dir: 'ÊÕ/Ö§', amount: '½ğ¶î', pay: 'ÊÕ/¸¶¿î·½Ê½', status: '½»Ò××´Ì¬', orderNo: '½»Ò×¶©µ¥ºÅ', merchantNo: 'ÉÌ¼Ò¶©µ¥ºÅ', note: '±¸×¢' }
-         FÊÇ¶şÑ¡Ò»
+         wechat: { time: 'äº¤æ˜“æ—¶é—´', type: 'äº¤æ˜“ç±»å‹', counterparty: 'äº¤æ˜“å¯¹æ–¹', product: 'å•†å“', dir: 'æ”¶/æ”¯', amount: 'é‡‘é¢', pay: 'æ”¯ä»˜æ–¹å¼', status: 'å½“å‰çŠ¶æ€', orderNo: 'äº¤æ˜“å•å·', merchantNo: 'å•†æˆ·å•å·', note: 'å¤‡æ³¨' },
+         alipay: { time: 'äº¤æ˜“æ—¶é—´', type: 'äº¤æ˜“åˆ†ç±»', counterparty: 'äº¤æ˜“å¯¹æ–¹', product: 'å•†å“è¯´æ˜', dir: 'æ”¶/æ”¯', amount: 'é‡‘é¢', pay: 'æ”¶/ä»˜æ¬¾æ–¹å¼', status: 'äº¤æ˜“çŠ¶æ€', orderNo: 'äº¤æ˜“è®¢å•å·', merchantNo: 'å•†å®¶è®¢å•å·', note: 'å¤‡æ³¨' }
+         Fæ˜¯äºŒé€‰ä¸€
          */
   const get = (r, f) => (head.map[F[f]] != null ? (r[head.map[F[f]]] == null ? '' : r[head.map[F[f]]]) : '');
   const out = [], filtered = [];
-  for (let i = head.headerIndex + 1; i < rows.length; i++) {            //¿ªÊ¼¶ÁÈ¡ÕËµ¥Êı¾İÁË
+  for (let i = head.headerIndex + 1; i < rows.length; i++) {            //å¼€å§‹è¯»å–è´¦å•æ•°æ®äº†
     const r = rows[i];
-    if (!r || !r.length) continue;                                  //rÎª¿Õ¾ÍÌø¹ı
-    /* Î¢ĞÅµÄ¡¸ÊÕ/Ö§¡¹Îª "/" ¼´²»¼ÆÊÕÖ§£¨ÁãÇ®ÌáÏÖ/×ªÕËµÈ£©£¬Ö§¸¶±¦Îª¡¸²»¼ÆÊÕÖ§¡¹ */
-    const dirRaw = String(get(r, 'dir')).trim();                //È¡rÕâÒ»ĞĞdirµÄÖµ->dirRaw
-    if (dirRaw !== 'Ö§³ö' && dirRaw !== 'ÊÕÈë') {                //ÑéÖ¤ÊÕÖ§
-      filtered.push({ row: r, why: '²»¼ÆÊÕÖ§£º' + (dirRaw || '¿Õ') });                        //ÎŞÓÃĞĞ±»¹ıÂËµ½filtered£¬»¹ÅäÉÏÔ­Òò
+    if (!r || !r.length) continue;                                  //rä¸ºç©ºå°±è·³è¿‡
+    /* å¾®ä¿¡çš„ã€Œæ”¶/æ”¯ã€ä¸º "/" å³ä¸è®¡æ”¶æ”¯ï¼ˆé›¶é’±æç°/è½¬è´¦ç­‰ï¼‰ï¼Œæ”¯ä»˜å®ä¸ºã€Œä¸è®¡æ”¶æ”¯ã€ */
+    const dirRaw = String(get(r, 'dir')).trim();                //å–rè¿™ä¸€è¡Œdirçš„å€¼->dirRaw
+    if (dirRaw !== 'æ”¯å‡º' && dirRaw !== 'æ”¶å…¥') {                //éªŒè¯æ”¶æ”¯
+      filtered.push({ row: r, why: 'ä¸è®¡æ”¶æ”¯ï¼š' + (dirRaw || 'ç©º') });                        //æ— ç”¨è¡Œè¢«è¿‡æ»¤åˆ°filteredï¼Œè¿˜é…ä¸ŠåŸå› 
       continue;
     }
-    const status = String(get(r, 'status')).trim();             //»ñµÃÕâÒ»ĞĞµÄ×´Ì¬
-    if (isExcludedStatus(head.source, status)) { filtered.push({ row: r, why: '×´Ì¬£º' + (status || '¿Õ') }); continue; }   //·¢ÏÖÒªÌØÊâ´¦Àí£¬Ò²·Å½øfiltered¡£
-    const amountCents = parseAmountCents(get(r, 'amount'));       //µ½½ğ¶îÁË£¬ÓÃparseAmountCentsµÃµ½·ÖÎ»µÄ½ğ¶îÊı×Ö->amountCents
-    if (amountCents == null || amountCents <= 0) { filtered.push({ row: r, why: '½ğ¶îÒì³££º' + get(r, 'amount') }); continue; }
-    const t0 = parseTime(get(r, 'time'));                       //Ê±¼ä£¬t0ÊÇ¸ö×Öµä{ts,date,month}
-    if (!t0) { filtered.push({ row: r, why: 'Ê±¼äÒì³££º' + get(r, 'time') }); continue; }
+    const status = String(get(r, 'status')).trim();             //è·å¾—è¿™ä¸€è¡Œçš„çŠ¶æ€
+    if (isExcludedStatus(head.source, status)) { filtered.push({ row: r, why: 'çŠ¶æ€ï¼š' + (status || 'ç©º') }); continue; }   //å‘ç°è¦ç‰¹æ®Šå¤„ç†ï¼Œä¹Ÿæ”¾è¿›filteredã€‚
+    const amountCents = parseAmountCents(get(r, 'amount'));       //åˆ°é‡‘é¢äº†ï¼Œç”¨parseAmountCentså¾—åˆ°åˆ†ä½çš„é‡‘é¢æ•°å­—->amountCents
+    if (amountCents == null || amountCents <= 0) { filtered.push({ row: r, why: 'é‡‘é¢å¼‚å¸¸ï¼š' + get(r, 'amount') }); continue; }
+    const t0 = parseTime(get(r, 'time'));                       //æ—¶é—´ï¼Œt0æ˜¯ä¸ªå­—å…¸{ts,date,month}
+    if (!t0) { filtered.push({ row: r, why: 'æ—¶é—´å¼‚å¸¸ï¼š' + get(r, 'time') }); continue; }
     const rec = {
       id: uid(), source: head.source, ts: t0.ts, date: t0.date, month: t0.month,
-      direction: dirRaw === 'Ö§³ö' ? 'expense' : 'income',
+      direction: dirRaw === 'æ”¯å‡º' ? 'expense' : 'income',
       amountCents: amountCents,
       counterparty: String(get(r, 'counterparty')).trim(),
       product: String(get(r, 'product')).trim(),
@@ -581,7 +583,7 @@ function parseBillText(text, items) {
 }
 /* ===== PURE-END ===== */
 
-/* ============================ µ¼Èë ============================ */
+/* ============================ å¯¼å…¥ ============================ */
 async function planImport(rows) {
   const months = [...new Set(rows.map(r => r.month))].sort();
   let exist = [];
@@ -610,11 +612,11 @@ async function undoBatch(id) {
   for (const r of rows) await delRec('transactions', r.id);
   const b = await getOne('importBatches', id);
   if (b) await putRec('importBatches', Object.assign({}, b, { undone: 1 }));
-  toast('ÒÑ³·Ïú ' + rows.length + ' ±Ê');
+  toast('å·²æ’¤é”€ ' + rows.length + ' ç¬”');
   await refreshAll();
 }
 
-/* ============================ ÌáÊ¾ ============================ */
+/* ============================ æç¤º ============================ */
 function toast(msg, actionLabel, action) {
   const el = document.createElement('div');
   el.className = 'toast';
@@ -624,7 +626,7 @@ function toast(msg, actionLabel, action) {
   setTimeout(() => el.remove(), actionLabel ? 8000 : 2400);
 }
 
-/* ============================ µ¯²ã ============================ */
+/* ============================ å¼¹å±‚ ============================ */
 function openSheet(id) {
   document.getElementById('mask').classList.add('on');
   document.querySelectorAll('.sheet').forEach(s => s.classList.remove('on'));
@@ -636,12 +638,12 @@ function closeSheet() {
 }
 document.getElementById('mask').onclick = closeSheet;
 
-/* ============================ äÖÈ¾£ºÊ×Ò³ ============================ */
+/* ============================ æ¸²æŸ“ï¼šé¦–é¡µ ============================ */
 function monthNav() {
   return '<div class="between" style="margin-bottom:10px">' +
-    '<button class="btn sm" data-m="' + shiftMonth(state.viewMonth, -1) + '">? ÉÏÔÂ</button>' +
+    '<button class="btn sm" data-m="' + shiftMonth(state.viewMonth, -1) + '">â€¹ ä¸Šæœˆ</button>' +
     '<h1>' + monthLabel(state.viewMonth) + '</h1>' +
-    '<button class="btn sm" data-m="' + shiftMonth(state.viewMonth, 1) + '">ÏÂÔÂ ?</button></div>';
+    '<button class="btn sm" data-m="' + shiftMonth(state.viewMonth, 1) + '">ä¸‹æœˆ â€º</button></div>';
 }
 async function renderHome() {
   const s = await monthSummary(state.viewMonth);
@@ -651,24 +653,24 @@ async function renderHome() {
   let h = monthNav();
 
   h += '<div class="card">' +
-    '<div class="between"><span class="muted">×ÜÔ¤Ëã</span><span class="muted">ÒÑ»¨ ?' + yuanT(s.spent) + '</span></div>' +
-    '<div class="row" style="align-items:baseline;gap:8px"><span class="big num">?' + yuanT(s.totalBudget) + '</span>' +
-    '<span class="hint">·ÖÀà ' + yuan(s.catTotal) + ' + ×·¼Ó ' + yuan(s.addTotal) + '</span></div>' +
+    '<div class="between"><span class="muted">æ€»é¢„ç®—</span><span class="muted">å·²èŠ± Â¥' + yuanT(s.spent) + '</span></div>' +
+    '<div class="row" style="align-items:baseline;gap:8px"><span class="big num">Â¥' + yuanT(s.totalBudget) + '</span>' +
+    '<span class="hint">åˆ†ç±» ' + yuan(s.catTotal) + ' + è¿½åŠ  ' + yuan(s.addTotal) + '</span></div>' +
     '<div class="bar" style="margin-top:8px"><i style="width:' + Math.min(100, pct * 100) + '%;background:' + (over ? 'var(--danger)' : 'var(--brand)') + '"></i>' +
     (s.isCurrent ? '<span class="tick" style="left:' + (s.ideal * 100) + '%"></span>' : '') + '</div>' +
-    '<div class="between" style="margin-top:4px"><span class="muted">' + (over ? '<span style="color:var(--danger-dark)">ÒÑ³¬Ö§ ?' + yuanT(-s.remain) + '</span>' : 'Ê£Óà <span style="color:var(--ok-dark)">?' + yuanT(s.remain) + '</span>') + '</span>' +
-    '<span class="hint">ÒÑÓÃ ' + Math.round(pct * 100) + '%' + (s.isCurrent ? ' ¡¤ ÀíÏë ' + Math.round(s.ideal * 100) + '%' : '') + '</span></div>' +
+    '<div class="between" style="margin-top:4px"><span class="muted">' + (over ? '<span style="color:var(--danger-dark)">å·²è¶…æ”¯ Â¥' + yuanT(-s.remain) + '</span>' : 'å‰©ä½™ <span style="color:var(--ok-dark)">Â¥' + yuanT(s.remain) + '</span>') + '</span>' +
+    '<span class="hint">å·²ç”¨ ' + Math.round(pct * 100) + '%' + (s.isCurrent ? ' Â· ç†æƒ³ ' + Math.round(s.ideal * 100) + '%' : '') + '</span></div>' +
     '<hr>' +
-    '<div class="between"><span class="muted">' + (s.isCurrent ? '½ñÈÕ»¹ÄÜ»¨' : 'ÈÕ¾ùÖ§³ö') + '</span>' +
-    '<span class="muted">' + (s.isCurrent ? '»¹Ê£ ' + s.daysLeft + ' Ìì ¡¤ ½ñÈÕÒÑ»¨ ?' + yuan(s.todaySpent) : 'ÀúÊ·ÔÂ·İ ¡¤ ¹² ' + s.dim + ' Ìì') + '</span></div>' +
-    '<div class="amt num">?' + yuan(s.isCurrent ? s.perDay : (s.dim ? Math.floor(s.spent / s.dim) : 0)) + '</div>' +
-    (s.isCurrent && s.perDay < 2000 ? '<div class="hint" style="color:var(--danger-dark)">½ÓÏÂÀ´Ã¿ÌìÖ»ÓĞ ?' + yuan(s.perDay) + '£¬×¢Òâ¿ØÖÆ</div>' : '') +
-    (s.excluded > 0 ? '<div class="hint" style="margin-top:4px">²»¼ÆÈëÔ¤Ëã ?' + yuan(s.excluded) + '</div>' : '') +
+    '<div class="between"><span class="muted">' + (s.isCurrent ? 'ä»Šæ—¥è¿˜èƒ½èŠ±' : 'æ—¥å‡æ”¯å‡º') + '</span>' +
+    '<span class="muted">' + (s.isCurrent ? 'è¿˜å‰© ' + s.daysLeft + ' å¤© Â· ä»Šæ—¥å·²èŠ± Â¥' + yuan(s.todaySpent) : 'å†å²æœˆä»½ Â· å…± ' + s.dim + ' å¤©') + '</span></div>' +
+    '<div class="amt num">Â¥' + yuan(s.isCurrent ? s.perDay : (s.dim ? Math.floor(s.spent / s.dim) : 0)) + '</div>' +
+    (s.isCurrent && s.perDay < 2000 ? '<div class="hint" style="color:var(--danger-dark)">æ¥ä¸‹æ¥æ¯å¤©åªæœ‰ Â¥' + yuan(s.perDay) + 'ï¼Œæ³¨æ„æ§åˆ¶</div>' : '') +
+    (s.excluded > 0 ? '<div class="hint" style="margin-top:4px">ä¸è®¡å…¥é¢„ç®— Â¥' + yuan(s.excluded) + '</div>' : '') +
     '</div>';
 
-  h += '<div class="between" style="margin:12px 2px 6px"><h2>·ÖÀàÔ¤Ëã</h2><a class="btn sm ghost" href="#/settings">¹ÜÀí ?</a></div>';
+  h += '<div class="between" style="margin:12px 2px 6px"><h2>åˆ†ç±»é¢„ç®—</h2><a class="btn sm ghost" href="#/settings">ç®¡ç† â€º</a></div>';
   if (!state.items.length) {
-    h += '<div class="empty">»¹Ã»ÓĞÔ¤ËãÏî£¬È¥ÉèÖÃÀïÌí¼Ó<br>¹Ø¼ü×Ö + ½ğ¶î£¬Ö§³ö»á×Ô¶¯¹éÀà</div>';
+    h += '<div class="empty">è¿˜æ²¡æœ‰é¢„ç®—é¡¹ï¼Œå»è®¾ç½®é‡Œæ·»åŠ <br>å…³é”®å­— + é‡‘é¢ï¼Œæ”¯å‡ºä¼šè‡ªåŠ¨å½’ç±»</div>';
   } else {
     for (const it of state.items) {
       const used = s.byCat.get(it.id) || 0;
@@ -680,18 +682,18 @@ async function renderHome() {
         '<span class="muted num">' + yuan(used) + ' / ' + yuan(it.amountCents) + '</span></div>' +
         '<div class="bar sm" style="margin:6px 0 4px;background:var(--card2)"><i style="width:' + Math.min(100, p2 * 100) + '%;background:' + color + '"></i></div>' +
         '<div class="between"><span class="muted">' + Math.round(p2 * 100) + '%</span>' +
-        '<span class="muted">' + (lv2 === 'over' ? '<span style="color:var(--danger-dark)">ÒÑ³¬Ö§ ?' + yuan(used - it.amountCents) + '</span>' : lv2 === 'warn' ? '<span style="color:var(--warn-dark)">½Ó½üÉÏÏŞ£¬Ê£ ?' + yuan(it.amountCents - used) + '</span>' : 'Ê£ ?' + yuan(it.amountCents - used)) + '</span></div>' +
+        '<span class="muted">' + (lv2 === 'over' ? '<span style="color:var(--danger-dark)">å·²è¶…æ”¯ Â¥' + yuan(used - it.amountCents) + '</span>' : lv2 === 'warn' ? '<span style="color:var(--warn-dark)">æ¥è¿‘ä¸Šé™ï¼Œå‰© Â¥' + yuan(it.amountCents - used) + '</span>' : 'å‰© Â¥' + yuan(it.amountCents - used)) + '</span></div>' +
         '</div>';
     }
     const other = s.byCat.get(OTHER_ID) || 0;
     h += '<div class="catrow" style="border-left-color:var(--gray)">' +
-      '<div class="between"><span class="row grow"><span class="dot" style="background:#9e9e9e"></span><span>ÆäËû</span></span><span class="muted num">?' + yuan(other) + '</span></div>' +
-      '<div class="hint" style="margin-top:3px">Î´ÃüÖĞ¹Ø¼ü×Ö ¡¤ ÎŞÔ¤Ëã</div></div>';
+      '<div class="between"><span class="row grow"><span class="dot" style="background:#9e9e9e"></span><span>å…¶ä»–</span></span><span class="muted num">Â¥' + yuan(other) + '</span></div>' +
+      '<div class="hint" style="margin-top:3px">æœªå‘½ä¸­å…³é”®å­— Â· æ— é¢„ç®—</div></div>';
   }
 
   const recent = s.exps.slice().sort((a, b) => b.ts - a.ts).slice(0, 5);
-  h += '<div class="between" style="margin:12px 2px 6px"><h2>×î½ü</h2><a class="btn sm ghost" href="#/list">È«²¿ ?</a></div>';
-  if (!recent.length) h += '<div class="empty">±¾ÔÂ»¹Ã»ÓĞÖ§³ö<br>µãÓÒÏÂ½Ç + ¼ÇÒ»±Ê£¬»òÈ¥ÉèÖÃµ¼ÈëÕËµ¥</div>';
+  h += '<div class="between" style="margin:12px 2px 6px"><h2>æœ€è¿‘</h2><a class="btn sm ghost" href="#/list">å…¨éƒ¨ â€º</a></div>';
+  if (!recent.length) h += '<div class="empty">æœ¬æœˆè¿˜æ²¡æœ‰æ”¯å‡º<br>ç‚¹å³ä¸‹è§’ + è®°ä¸€ç¬”ï¼Œæˆ–å»è®¾ç½®å¯¼å…¥è´¦å•</div>';
   else {
     h += '<div class="list">';
     for (const t of recent) h += txnRow(t);
@@ -700,24 +702,24 @@ async function renderHome() {
   document.getElementById('page-home').innerHTML = h;
 }
 function txnRow(t) {
-  const name = (t.counterparty || t.product || (t.note || 'Î´ÃüÃû')).slice(0, 30);
+  const name = (t.counterparty || t.product || (t.note || 'æœªå‘½å')).slice(0, 30);
   return '<div class="item between" data-txn="' + t.id + '">' +
     '<span class="row grow"><span class="dot" style="background:' + itemColor(t.categoryId) + '"></span>' +
     '<span class="grow"><span class="ell" style="display:block">' + esc(name) + '</span>' +
-    '<span class="hint">' + esc(itemName(t.categoryId)) + ' ¡¤ ' + t.date.slice(5) + (t.excludeFromBudget ? ' ¡¤ <span style="color:var(--sub)">²»Õ¼Ô¤Ëã</span>' : '') + '</span></span></span>' +
+    '<span class="hint">' + esc(itemName(t.categoryId)) + ' Â· ' + t.date.slice(5) + (t.excludeFromBudget ? ' Â· <span style="color:var(--sub)">ä¸å é¢„ç®—</span>' : '') + '</span></span></span>' +
     '<span class="num" style="font-weight:500">' + (t.direction === 'expense' ? '-' : '+') + yuan(t.amountCents) + '</span></div>';
 }
 
-/* ============================ äÖÈ¾£ºÃ÷Ï¸ ============================ */
+/* ============================ æ¸²æŸ“ï¼šæ˜ç»† ============================ */
 async function renderList() {
   const month = state.viewMonth;
   const rows = (await getIdx('transactions', 'by_month', IDBKeyRange.only(month))).sort((a, b) => b.ts - a.ts);
   let h = monthNav();
-  const cats = [{ id: '', name: 'È«²¿' }].concat(state.items.map(x => ({ id: x.id, name: x.name }))).concat([{ id: OTHER_ID, name: 'ÆäËû' }]);
+  const cats = [{ id: '', name: 'å…¨éƒ¨' }].concat(state.items.map(x => ({ id: x.id, name: x.name }))).concat([{ id: OTHER_ID, name: 'å…¶ä»–' }]);
   h += '<div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px">';
   for (const c of cats) h += '<button class="chip ' + (state.filter.cat === c.id ? 'on' : '') + '" data-fcat="' + c.id + '">' + esc(c.name) + '</button>';
   h += '</div>';
-  h += '<div class="field"><input id="q" placeholder="ËÑË÷ÉÌ¼Ò / ÉÌÆ· / ±¸×¢" value="' + esc(state.filter.q) + '"></div>';
+  h += '<div class="field"><input id="q" placeholder="æœç´¢å•†å®¶ / å•†å“ / å¤‡æ³¨" value="' + esc(state.filter.q) + '"></div>';
 
   let list = rows;
   if (state.filter.cat) list = list.filter(t => t.categoryId === state.filter.cat);
@@ -725,9 +727,9 @@ async function renderList() {
     const q = state.filter.q.toLowerCase();
     list = list.filter(t => [t.counterparty, t.product, t.note].join(' ').toLowerCase().indexOf(q) >= 0);
   }
-  if (!list.length) { h += '<div class="empty">Ã»ÓĞ·ûºÏÌõ¼şµÄ¼ÇÂ¼</div>'; document.getElementById('page-list').innerHTML = h; return; }
+  if (!list.length) { h += '<div class="empty">æ²¡æœ‰ç¬¦åˆæ¡ä»¶çš„è®°å½•</div>'; document.getElementById('page-list').innerHTML = h; return; }
 
-  // Ã¿ÈÕÊ£ÓàÔ¤Ëã£º°´ÕûÔÂ¡¸¼ÆÈëÔ¤Ëã¡¹µÄÖ§³öÖğÈÕÀÛ¼Æ£¬²»ÊÜÏÂÁĞ·ÖÀà / ËÑË÷É¸Ñ¡Ó°Ïì
+  // æ¯æ—¥å‰©ä½™é¢„ç®—ï¼šæŒ‰æ•´æœˆã€Œè®¡å…¥é¢„ç®—ã€çš„æ”¯å‡ºé€æ—¥ç´¯è®¡ï¼Œä¸å—ä¸‹åˆ—åˆ†ç±» / æœç´¢ç­›é€‰å½±å“
   const ms = await monthSummary(state.viewMonth);
   const daySpend = new Map();
   for (const r of ms.exps) daySpend.set(r.date, (daySpend.get(r.date) || 0) + r.amountCents);
@@ -742,7 +744,7 @@ async function renderList() {
   for (const [d, arr] of byDate) {
     const sum = arr.filter(t => t.direction === 'expense').reduce((a, t) => a + t.amountCents, 0);
     const rem = remainOn(d);
-    h += '<div class="dayhead"><span>' + d.slice(5) + ' ' + weekday(d) + '</span><span class="num">Ö§³ö ?' + yuan(sum) + ' ¡¤ Ê£ <span style="color:' + (rem < 0 ? 'var(--danger-dark)' : 'inherit') + '">?' + yuan(rem) + '</span></span></div>';
+    h += '<div class="dayhead"><span>' + d.slice(5) + ' ' + weekday(d) + '</span><span class="num">æ”¯å‡º Â¥' + yuan(sum) + ' Â· å‰© <span style="color:' + (rem < 0 ? 'var(--danger-dark)' : 'inherit') + '">Â¥' + yuan(rem) + '</span></span></div>';
     for (const t of arr) h += txnRow(t);
   }
   h += '</div>';
@@ -751,7 +753,7 @@ async function renderList() {
   if (q) q.oninput = () => { state.filter.q = q.value; renderList(); setTimeout(() => { const e = document.getElementById('q'); if (e) { e.focus(); e.setSelectionRange(e.value.length, e.value.length); } }, 0); };
 }
 
-/* ============================ äÖÈ¾£ºÍ³¼Æ ============================ */
+/* ============================ æ¸²æŸ“ï¼šç»Ÿè®¡ ============================ */
 async function renderStats() {
   const s = await monthSummary(state.viewMonth);
   const inc = await getSetting('statsIncludeExcluded', 0);
@@ -772,18 +774,18 @@ async function renderStats() {
     acc += frac;
   }
   const ov = byCat.get(OTHER_ID) || 0;
-  if (ov > 0) { const frac = total > 0 ? ov / total : 0; segs.push({ name: 'ÆäËû', color: '#9e9e9e', v: ov, frac: frac, dash: frac * C, off: -acc * C }); acc += frac; }
+  if (ov > 0) { const frac = total > 0 ? ov / total : 0; segs.push({ name: 'å…¶ä»–', color: '#9e9e9e', v: ov, frac: frac, dash: frac * C, off: -acc * C }); acc += frac; }
 
   h += '<div class="card"><div class="donate">';
-  if (!segs.length) h += '<div class="muted">±¾ÔÂ»¹Ã»ÓĞÖ§³ö</div>';
+  if (!segs.length) h += '<div class="muted">æœ¬æœˆè¿˜æ²¡æœ‰æ”¯å‡º</div>';
   else {
-    h += '<svg width="140" height="140" viewBox="0 0 100 100" role="img"><title>±¾ÔÂ·ÖÀàÕ¼±È</title><g transform="rotate(-90 50 50)" fill="none" stroke-width="15">';
+    h += '<svg width="140" height="140" viewBox="0 0 100 100" role="img"><title>æœ¬æœˆåˆ†ç±»å æ¯”</title><g transform="rotate(-90 50 50)" fill="none" stroke-width="15">';
     h += '<circle cx="50" cy="50" r="40" stroke="var(--gray-soft)"></circle>';
     for (const g of segs) h += '<circle cx="50" cy="50" r="40" stroke="' + g.color + '" stroke-dasharray="' + g.dash.toFixed(2) + ' ' + C.toFixed(2) + '" stroke-dashoffset="' + g.off.toFixed(2) + '"></circle>';
-    h += '</g><text x="50" y="47" text-anchor="middle" font-size="8" fill="var(--sub)">Ö§³ö</text>' +
+    h += '</g><text x="50" y="47" text-anchor="middle" font-size="8" fill="var(--sub)">æ”¯å‡º</text>' +
       '<text x="50" y="58" text-anchor="middle" font-size="11" font-weight="500" fill="var(--text)">' + yuanT(total) + '</text></svg>';
     h += '<div class="legend">';
-    for (const g of segs) h += '<div class="row" style="margin-bottom:5px"><span class="dot" style="background:' + g.color + '"></span><span class="grow">' + esc(g.name) + '</span><span class="num muted">' + Math.round(g.frac * 100) + '% ?' + yuan(g.v) + '</span></div>';
+    for (const g of segs) h += '<div class="row" style="margin-bottom:5px"><span class="dot" style="background:' + g.color + '"></span><span class="grow">' + esc(g.name) + '</span><span class="num muted">' + Math.round(g.frac * 100) + '% Â¥' + yuan(g.v) + '</span></div>';
     h += '</div>';
   }
   h += '</div></div>';
@@ -793,11 +795,11 @@ async function renderStats() {
   const vals = [];
   for (const m of months) { const e = await monthExpenses(m); vals.push(e.reduce((x, r) => x + r.amountCents, 0)); }
   const max = Math.max.apply(null, vals.concat([1]));
-  h += '<div class="card"><h2 style="margin-bottom:10px">½ü 6 ¸öÔÂ</h2><div style="display:flex;align-items:flex-end;gap:8px;height:110px">';
+  h += '<div class="card"><h2 style="margin-bottom:10px">è¿‘ 6 ä¸ªæœˆ</h2><div style="display:flex;align-items:flex-end;gap:8px;height:110px">';
   months.forEach((m, i) => {
     const cur = m === state.viewMonth;
     h += '<div style="flex:1;text-align:center"><div style="height:' + Math.max(3, (vals[i] / max) * 78) + 'px;background:' + (cur ? 'var(--brand)' : 'var(--brand-soft)') + ';border-radius:4px"></div>' +
-      '<div class="hint" style="margin-top:4px">' + Number(m.slice(5)) + 'ÔÂ</div><div class="hint num">' + Math.round(vals[i] / 100) + '</div></div>';
+      '<div class="hint" style="margin-top:4px">' + Number(m.slice(5)) + 'æœˆ</div><div class="hint num">' + Math.round(vals[i] / 100) + '</div></div>';
   });
   h += '</div></div>';
 
@@ -805,78 +807,78 @@ async function renderStats() {
   const pe = await monthExpenses(prev);
   const pv = pe.reduce((x, r) => x + r.amountCents, 0);
   const diff = total - pv;
-  h += '<div class="card"><div class="between"><span class="muted">¶Ô±ÈÉÏÔÂ</span><span class="num">' + (diff >= 0 ? '+' : '-') + '?' + yuan(Math.abs(diff)) + '</span></div>' +
-    '<div class="hint">ÉÏÔÂÖ§³ö ?' + yuanT(pv) + '</div></div>';
+  h += '<div class="card"><div class="between"><span class="muted">å¯¹æ¯”ä¸Šæœˆ</span><span class="num">' + (diff >= 0 ? '+' : '-') + 'Â¥' + yuan(Math.abs(diff)) + '</span></div>' +
+    '<div class="hint">ä¸Šæœˆæ”¯å‡º Â¥' + yuanT(pv) + '</div></div>';
 
-  h += '<div class="card"><div class="row"><button class="sw ' + (inc ? 'on' : '') + '" id="sw-inc"></button><span style="font-size:13px">°üº¬¡¸²»¼ÆÈëÔ¤Ëã¡¹µÄ´ó¶î</span></div>' +
-    '<div class="hint" style="margin-top:6px">µ±Ç°²»¼ÆÈëÔ¤Ëã¹² ?' + yuan(s.excluded) + '</div></div>';
+  h += '<div class="card"><div class="row"><button class="sw ' + (inc ? 'on' : '') + '" id="sw-inc"></button><span style="font-size:13px">åŒ…å«ã€Œä¸è®¡å…¥é¢„ç®—ã€çš„å¤§é¢</span></div>' +
+    '<div class="hint" style="margin-top:6px">å½“å‰ä¸è®¡å…¥é¢„ç®—å…± Â¥' + yuan(s.excluded) + '</div></div>';
 
   document.getElementById('page-stats').innerHTML = h;
   const sw = document.getElementById('sw-inc');
   if (sw) sw.onclick = async () => { await setSetting('statsIncludeExcluded', inc ? 0 : 1); renderStats(); };
 }
 
-/* ============================ äÖÈ¾£ºÉèÖÃ ============================ */
+/* ============================ æ¸²æŸ“ï¼šè®¾ç½® ============================ */
 async function renderSettings() {
   const items = state.items;
   const adds = await monthAdds(state.viewMonth);
   const batches = (await getAll('importBatches')).sort((a, b) => b.importedAt - a.importedAt).slice(0, 8);
   const theme = await getSetting('theme', 'system');
-  let h = '<h1 style="margin-bottom:12px">ÉèÖÃ</h1>';
+  let h = '<h1 style="margin-bottom:12px">è®¾ç½®</h1>';
 
-  h += '<div class="card"><h2 style="margin-bottom:8px">µ¼ÈëÕËµ¥</h2>' +
-    '<button class="btn block" id="btn-import" style="margin-bottom:8px">Ñ¡Ôñ CSV ÎÄ¼ş</button>' +
+  h += '<div class="card"><h2 style="margin-bottom:8px">å¯¼å…¥è´¦å•</h2>' +
+    '<button class="btn block" id="btn-import" style="margin-bottom:8px">é€‰æ‹© CSV æ–‡ä»¶</button>' +
     '<div id="dir-box"></div>' +
-    '<div class="hint">Î¢ĞÅÓëÖ§¸¶±¦¹Ù·½µ¼³öµÄ CSV ¶¼Ö§³Ö¡£Ö§¸¶±¦¸½¼şÊÇ zip£¬ÇëÏÈ½âÑ¹£¨ÃÜÂëÔÚÖ§¸¶±¦¡¸·şÎñÍ¨Öª¡¹Àï£©¡£</div></div>';
+    '<div class="hint">å¾®ä¿¡ä¸æ”¯ä»˜å®å®˜æ–¹å¯¼å‡ºçš„ CSV éƒ½æ”¯æŒã€‚æ”¯ä»˜å®é™„ä»¶æ˜¯ zipï¼Œè¯·å…ˆè§£å‹ï¼ˆå¯†ç åœ¨æ”¯ä»˜å®ã€ŒæœåŠ¡é€šçŸ¥ã€é‡Œï¼‰ã€‚</div></div>';
 
   if (batches.length) {
-    h += '<div class="card"><h2 style="margin-bottom:8px">µ¼ÈëÀúÊ·</h2>';
+    h += '<div class="card"><h2 style="margin-bottom:8px">å¯¼å…¥å†å²</h2>';
     for (const b of batches) {
       h += '<div class="between" style="padding:6px 0;border-bottom:0.5px solid var(--line)">' +
-        '<span class="grow"><span style="display:block;font-size:13px">' + (b.source === 'wechat' ? 'Î¢ĞÅ' : 'Ö§¸¶±¦') + ' ¡¤ ' + b.count + ' ±Ê</span>' +
-        '<span class="hint">' + new Date(b.importedAt).toLocaleString('zh-CN') + (b.undone ? ' ¡¤ ÒÑ³·Ïú' : '') + '</span></span>' +
-        (b.undone ? '' : '<button class="btn sm danger" data-undo="' + b.id + '">³·Ïú</button>') + '</div>';
+        '<span class="grow"><span style="display:block;font-size:13px">' + (b.source === 'wechat' ? 'å¾®ä¿¡' : 'æ”¯ä»˜å®') + ' Â· ' + b.count + ' ç¬”</span>' +
+        '<span class="hint">' + new Date(b.importedAt).toLocaleString('zh-CN') + (b.undone ? ' Â· å·²æ’¤é”€' : '') + '</span></span>' +
+        (b.undone ? '' : '<button class="btn sm danger" data-undo="' + b.id + '">æ’¤é”€</button>') + '</div>';
     }
     h += '</div>';
   }
 
-  h += '<div class="card"><div class="between" style="margin-bottom:8px"><h2>·ÖÀàÔ¤ËãÏî</h2><span class="muted">' + items.length + ' Ïî ¡¤ ºÏ¼Æ ?' + yuan(items.reduce((s, x) => s + x.amountCents, 0)) + '</span></div>';
+  h += '<div class="card"><div class="between" style="margin-bottom:8px"><h2>åˆ†ç±»é¢„ç®—é¡¹</h2><span class="muted">' + items.length + ' é¡¹ Â· åˆè®¡ Â¥' + yuan(items.reduce((s, x) => s + x.amountCents, 0)) + '</span></div>';
   for (const it of items) {
     h += '<div class="item" style="padding:10px 0">' +
       '<div class="between"><span class="row grow"><span class="dot" style="background:' + it.color + '"></span><span>' + esc(it.name) + '</span>' +
-      (it.isDefault ? '<span class="tag">Ä¬ÈÏ</span>' : '') + '</span>' +
-      '<span class="num">?' + yuan(it.amountCents) + '</span></div>' +
-      '<div class="hint" style="margin:3px 0 5px">' + esc(it.keywords.join(' ¡¤ ') || 'ÎŞ¹Ø¼ü×Ö') + '</div>' +
-      '<div class="row" style="gap:6px"><button class="btn sm" data-edit="' + it.id + '">±à¼­</button>' +
-      '<button class="btn sm" data-up="' + it.id + '">ÉÏÒÆ</button>' +
-      '<button class="btn sm danger" data-del="' + it.id + '">É¾³ı</button></div></div>';
+      (it.isDefault ? '<span class="tag">é»˜è®¤</span>' : '') + '</span>' +
+      '<span class="num">Â¥' + yuan(it.amountCents) + '</span></div>' +
+      '<div class="hint" style="margin:3px 0 5px">' + esc(it.keywords.join(' Â· ') || 'æ— å…³é”®å­—') + '</div>' +
+      '<div class="row" style="gap:6px"><button class="btn sm" data-edit="' + it.id + '">ç¼–è¾‘</button>' +
+      '<button class="btn sm" data-up="' + it.id + '">ä¸Šç§»</button>' +
+      '<button class="btn sm danger" data-del="' + it.id + '">åˆ é™¤</button></div></div>';
   }
-  h += '<div class="row" style="margin-top:10px"><button class="btn block" id="btn-item-new">+ ĞÂÔö</button>' +
-    '<button class="btn block" id="btn-tpl">»Ö¸´Ä¬ÈÏÄ£°å</button></div>' +
-    '<div class="hint" style="margin-top:8px">Ö§³ö°´¹Ø¼ü×Ö´ÓÉÏµ½ÏÂÆ¥Åä£¬µÚÒ»¸öÃüÖĞÉúĞ§£»¶¼Ã»ÃüÖĞ¾Í½ø¡¸ÆäËû¡¹¡£</div></div>';
+  h += '<div class="row" style="margin-top:10px"><button class="btn block" id="btn-item-new">+ æ–°å¢</button>' +
+    '<button class="btn block" id="btn-tpl">æ¢å¤é»˜è®¤æ¨¡æ¿</button></div>' +
+    '<div class="hint" style="margin-top:8px">æ”¯å‡ºæŒ‰å…³é”®å­—ä»ä¸Šåˆ°ä¸‹åŒ¹é…ï¼Œç¬¬ä¸€ä¸ªå‘½ä¸­ç”Ÿæ•ˆï¼›éƒ½æ²¡å‘½ä¸­å°±è¿›ã€Œå…¶ä»–ã€ã€‚</div></div>';
 
-  h += '<div class="card"><div class="between" style="margin-bottom:8px"><h2>±¾ÔÂ×·¼ÓÔ¤Ëã</h2><span class="muted">?' + yuan(adds.reduce((s, x) => s + x.amountCents, 0)) + '</span></div>';
-  if (!adds.length) h += '<div class="hint">»¹Ã»ÓĞ×·¼Ó¡£±¨Ïúµ½ÕË¡¢¸¸Ä¸¶à¸øµÄÇ®¼ÇÔÚÕâÀï¡£</div>';
+  h += '<div class="card"><div class="between" style="margin-bottom:8px"><h2>æœ¬æœˆè¿½åŠ é¢„ç®—</h2><span class="muted">Â¥' + yuan(adds.reduce((s, x) => s + x.amountCents, 0)) + '</span></div>';
+  if (!adds.length) h += '<div class="hint">è¿˜æ²¡æœ‰è¿½åŠ ã€‚æŠ¥é”€åˆ°è´¦ã€çˆ¶æ¯å¤šç»™çš„é’±è®°åœ¨è¿™é‡Œã€‚</div>';
   for (const a of adds) {
     h += '<div class="between" style="padding:6px 0;border-bottom:0.5px solid var(--line)">' +
-      '<span class="grow"><span style="display:block;font-size:13px">' + esc(a.source) + ' ?' + yuan(a.amountCents) + '</span>' +
-      '<span class="hint">' + esc(a.note || 'ÎŞ±¸×¢') + '</span></span>' +
-      '<button class="btn sm danger" data-voidadd="' + a.id + '">³·Ïú</button></div>';
+      '<span class="grow"><span style="display:block;font-size:13px">' + esc(a.source) + ' Â¥' + yuan(a.amountCents) + '</span>' +
+      '<span class="hint">' + esc(a.note || 'æ— å¤‡æ³¨') + '</span></span>' +
+      '<button class="btn sm danger" data-voidadd="' + a.id + '">æ’¤é”€</button></div>';
   }
-  h += '<button class="btn block" id="btn-ab" style="margin-top:10px">+ ×·¼ÓÔ¤Ëã</button></div>';
+  h += '<button class="btn block" id="btn-ab" style="margin-top:10px">+ è¿½åŠ é¢„ç®—</button></div>';
 
-  h += '<div class="card"><h2 style="margin-bottom:8px">Êı¾İ</h2>' +
-    '<div class="row" style="margin-bottom:8px"><button class="btn block" id="btn-export">µ¼³ö±¸·İ</button><button class="btn block" id="btn-import-bk">µ¼Èë±¸·İ</button></div>' +
+  h += '<div class="card"><h2 style="margin-bottom:8px">æ•°æ®</h2>' +
+    '<div class="row" style="margin-bottom:8px"><button class="btn block" id="btn-export">å¯¼å‡ºå¤‡ä»½</button><button class="btn block" id="btn-import-bk">å¯¼å…¥å¤‡ä»½</button></div>' +
     '<div class="hint" id="persist-hint"></div></div>';
 
-  h += '<div class="card"><h2 style="margin-bottom:8px">Íâ¹Û</h2><div class="seg" id="theme-seg">' +
-    ['system', 'light', 'dark'].map(t => '<button data-theme="' + t + '" class="' + (theme === t ? 'on' : '') + '">' + ({ system: '¸úËæÏµÍ³', light: 'Ç³É«', dark: 'ÉîÉ«' }[t]) + '</button>').join('') +
+  h += '<div class="card"><h2 style="margin-bottom:8px">å¤–è§‚</h2><div class="seg" id="theme-seg">' +
+    ['system', 'light', 'dark'].map(t => '<button data-theme="' + t + '" class="' + (theme === t ? 'on' : '') + '">' + ({ system: 'è·Ÿéšç³»ç»Ÿ', light: 'æµ…è‰²', dark: 'æ·±è‰²' }[t]) + '</button>').join('') +
     '</div></div>';
 
   h += '<div class="card"><div id="install-box"></div>' +
-    '<button class="btn block danger" id="btn-clear" style="margin-top:8px">Çå¿ÕËùÓĞÊı¾İ</button></div>';
+    '<button class="btn block danger" id="btn-clear" style="margin-top:8px">æ¸…ç©ºæ‰€æœ‰æ•°æ®</button></div>';
 
-  h += '<div class="card hint">Êı¾İÖ»´æÔÚÕâÌ¨ÊÖ»úµÄä¯ÀÀÆ÷Àï£¬²»ÉÏ´«ÈÎºÎ·şÎñÆ÷¡£Çå³ıä¯ÀÀÆ÷Êı¾İ¡¢Ğ¶ÔØÓ¦ÓÃ»ò»»ÊÖ»ú¶¼»á¶ªÊ§£¬Çë¶¨ÆÚµ¼³ö±¸·İ¡£</div>';
+  h += '<div class="card hint">æ•°æ®åªå­˜åœ¨è¿™å°æ‰‹æœºçš„æµè§ˆå™¨é‡Œï¼Œä¸ä¸Šä¼ ä»»ä½•æœåŠ¡å™¨ã€‚æ¸…é™¤æµè§ˆå™¨æ•°æ®ã€å¸è½½åº”ç”¨æˆ–æ¢æ‰‹æœºéƒ½ä¼šä¸¢å¤±ï¼Œè¯·å®šæœŸå¯¼å‡ºå¤‡ä»½ã€‚</div>';
 
   document.getElementById('page-settings').innerHTML = h;
   bindSettings();
@@ -889,15 +891,15 @@ function bindSettings() {
   byId('btn-item-new').onclick = () => openItem(null);
   byId('btn-ab').onclick = () => openAddBudget();
   byId('btn-tpl').onclick = async () => {
-    if (!confirm('»Ö¸´Ä¬ÈÏÄ£°å»á¸²¸Çµ±Ç°ËùÓĞÔ¤ËãÏî£¬È·¶¨£¿')) return;
-    await restoreTemplate(); await refreshAll(); toast('ÒÑ»Ö¸´Ä¬ÈÏÄ£°å');
+    if (!confirm('æ¢å¤é»˜è®¤æ¨¡æ¿ä¼šè¦†ç›–å½“å‰æ‰€æœ‰é¢„ç®—é¡¹ï¼Œç¡®å®šï¼Ÿ')) return;
+    await restoreTemplate(); await refreshAll(); toast('å·²æ¢å¤é»˜è®¤æ¨¡æ¿');
   };
   byId('btn-clear').onclick = async () => {
-    if (!confirm('»áÉ¾³ıËùÓĞ½»Ò×¡¢Ô¤ËãÏîÓëÉèÖÃ£¬ÇÒÎŞ·¨³·Ïú¡£½¨ÒéÏÈµ¼³ö±¸·İ¡£È·¶¨Çå¿Õ£¿')) return;
+    if (!confirm('ä¼šåˆ é™¤æ‰€æœ‰äº¤æ˜“ã€é¢„ç®—é¡¹ä¸è®¾ç½®ï¼Œä¸”æ— æ³•æ’¤é”€ã€‚å»ºè®®å…ˆå¯¼å‡ºå¤‡ä»½ã€‚ç¡®å®šæ¸…ç©ºï¼Ÿ')) return;
     for (const s of ['transactions', 'budgetItems', 'budgets', 'importBatches']) await clearStore(s);
     await setSetting('firstRunDone', 0);
     await seedItems(await getSetting('monthlyTargetCents', DEFAULT_TOTAL * 100));
-    await refreshAll(); toast('ÒÑÇå¿Õ');
+    await refreshAll(); toast('å·²æ¸…ç©º');
   };
   document.getElementById('theme-seg').onclick = async e => {
     const t = e.target.getAttribute('data-theme'); if (!t) return;
@@ -907,9 +909,9 @@ function bindSettings() {
   document.querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
     const it = await getOne('budgetItems', b.getAttribute('data-del'));
     if (!it) return;
-    if (!confirm('É¾³ı¡¸' + it.name + '¡¹£¿ÀúÊ·¼ÇÂ¼ÈÔ»á±£Áô¸Ã·ÖÀà¡£')) return;
+    if (!confirm('åˆ é™¤ã€Œ' + it.name + 'ã€ï¼Ÿå†å²è®°å½•ä»ä¼šä¿ç•™è¯¥åˆ†ç±»ã€‚')) return;
     await putRec('budgetItems', Object.assign({}, it, { archived: 1 }));
-    await refreshAll(); toast('ÒÑÉ¾³ı£¬ÀúÊ·¼ÇÂ¼±£Áô¸Ã·ÖÀà');
+    await refreshAll(); toast('å·²åˆ é™¤ï¼Œå†å²è®°å½•ä¿ç•™è¯¥åˆ†ç±»');
   });
   document.querySelectorAll('[data-up]').forEach(b => b.onclick = async () => {
     const id = b.getAttribute('data-up');
@@ -923,13 +925,13 @@ function bindSettings() {
   document.querySelectorAll('[data-undo]').forEach(b => b.onclick = () => undoBatch(b.getAttribute('data-undo')));
   document.querySelectorAll('[data-voidadd]').forEach(b => b.onclick = async () => {
     const a = await getOne('budgets', b.getAttribute('data-voidadd'));
-    if (a) { await putRec('budgets', Object.assign({}, a, { status: 'void' })); await refreshAll(); toast('ÒÑ³·Ïú×·¼Ó'); }
+    if (a) { await putRec('budgets', Object.assign({}, a, { status: 'void' })); await refreshAll(); toast('å·²æ’¤é”€è¿½åŠ '); }
   });
   renderDirBox(); renderInstallBox(); renderPersist();
 }
 function applyTheme(t) { document.documentElement.setAttribute('data-theme', t); }
 
-/* ============================ ¼ÇÒ»±Ê ============================ */
+/* ============================ è®°ä¸€ç¬” ============================ */
 let addState = { dir: 'expense', cat: '' };
 async function openAdd() {
   addState = { dir: 'expense', cat: (await getSetting('lastCategoryId', '')) || (state.items[0] ? state.items[0].id : OTHER_ID) };
@@ -945,7 +947,7 @@ async function openAdd() {
 }
 function renderAddCats() {
   const box = document.getElementById('add-cats');
-  const list = state.items.concat([{ id: OTHER_ID, name: 'ÆäËû', color: '#9e9e9e' }]);
+  const list = state.items.concat([{ id: OTHER_ID, name: 'å…¶ä»–', color: '#9e9e9e' }]);
   box.innerHTML = list.map(c => '<button class="catbtn ' + (addState.cat === c.id ? 'on' : '') + '" data-cat="' + c.id + '"><span class="dot" style="background:' + c.color + '"></span>' + esc(c.name) + '</button>').join('');
   box.querySelectorAll('[data-cat]').forEach(b => b.onclick = () => { addState.cat = b.getAttribute('data-cat'); renderAddCats(); });
 }
@@ -955,7 +957,7 @@ document.getElementById('add-exclude').onclick = e => e.currentTarget.classList.
 document.getElementById('add-cancel').onclick = closeSheet;
 document.getElementById('add-save').onclick = async () => {
   const c = parseYuan(document.getElementById('add-amount').value);
-  if (c == null || c <= 0) { toast('ÇëÊäÈë½ğ¶î'); return; }
+  if (c == null || c <= 0) { toast('è¯·è¾“å…¥é‡‘é¢'); return; }
   const date = document.getElementById('add-date').value || todayStr();
   const note = document.getElementById('add-note').value.trim();
   const exc = document.getElementById('add-exclude').classList.contains('on') ? 1 : 0;
@@ -963,20 +965,20 @@ document.getElementById('add-save').onclick = async () => {
   const t = {
     id: id, source: 'manual', ts: new Date(date + 'T12:00:00').getTime(), date: date,
     direction: addState.dir, amountCents: c, categoryId: addState.cat,
-    counterparty: note ? note : 'ÊÖ¶¯¼ÇÂ¼', product: '', rawType: '', rawStatus: '',
+    counterparty: note ? note : 'æ‰‹åŠ¨è®°å½•', product: '', rawType: '', rawStatus: '',
     payMethod: '', orderNo: null, merchantNo: null, note: note,
     excludeFromBudget: exc, batchId: null, dedupKey: 'manual:' + id, createdAt: Date.now(), updatedAt: Date.now()
   };
   await saveTransaction(t);
   await setSetting('lastCategoryId', addState.cat);
   closeSheet(); await refreshAll();
-  toast('ÒÑ¼ÇÂ¼ ?' + yuan(c));
+  toast('å·²è®°å½• Â¥' + yuan(c));
 };
 
-/* ============================ Ô¤ËãÏî±à¼­ ============================ */
+/* ============================ é¢„ç®—é¡¹ç¼–è¾‘ ============================ */
 let itemState = { id: null, kws: [], color: PALETTE[0], def: 0 };
 function renderItemKws() {
-  document.getElementById('item-kws').innerHTML = itemState.kws.map((k, i) => '<span class="kw">' + esc(k) + '<b data-kw="' + i + '">¡Á</b></span>').join('');
+  document.getElementById('item-kws').innerHTML = itemState.kws.map((k, i) => '<span class="kw">' + esc(k) + '<b data-kw="' + i + '">Ã—</b></span>').join('');
   document.querySelectorAll('[data-kw]').forEach(b => b.onclick = () => { itemState.kws.splice(+b.getAttribute('data-kw'), 1); renderItemKws(); });
 }
 function renderItemColors() {
@@ -986,7 +988,7 @@ function renderItemColors() {
 async function openItem(id) {
   const it = id ? await getOne('budgetItems', id) : null;
   itemState = { id: id || null, kws: it ? it.keywords.slice() : [], color: it ? it.color : PALETTE[0], def: it ? it.isDefault : 0 };
-  document.getElementById('item-title').textContent = id ? '±à¼­Ô¤ËãÏî' : 'ĞÂÔöÔ¤ËãÏî';
+  document.getElementById('item-title').textContent = id ? 'ç¼–è¾‘é¢„ç®—é¡¹' : 'æ–°å¢é¢„ç®—é¡¹';
   document.getElementById('item-id').value = id || '';
   document.getElementById('item-name').value = it ? it.name : '';
   document.getElementById('item-amount').value = it ? yuan(it.amountCents) : '';
@@ -1007,8 +1009,8 @@ document.getElementById('item-cancel').onclick = closeSheet;
 document.getElementById('item-save').onclick = async () => {
   const name = document.getElementById('item-name').value.trim();
   const amt = parseYuan(document.getElementById('item-amount').value);
-  if (!name) { toast('ÇëÌîĞ´Ãû³Æ'); return; }
-  if (amt == null || amt < 0) { toast('ÇëÌîĞ´ÔÂÔ¤Ëã'); return; }
+  if (!name) { toast('è¯·å¡«å†™åç§°'); return; }
+  if (amt == null || amt < 0) { toast('è¯·å¡«å†™æœˆé¢„ç®—'); return; }
   const now = Date.now();
   const old = itemState.id ? await getOne('budgetItems', itemState.id) : null;
   const rec = {
@@ -1021,10 +1023,10 @@ document.getElementById('item-save').onclick = async () => {
   closeSheet();
   await refreshAll();
   const kwChanged = !old || JSON.stringify(old.keywords) !== JSON.stringify(rec.keywords);
-  if (kwChanged && confirm('¹Ø¼ü×ÖÓĞ±ä»¯£¬ÊÇ·ñ°´ĞÂ¹æÔòÖØĞÂ¹éÀàËùÓĞÖ§³ö£¿')) await recategorize('all');
+  if (kwChanged && confirm('å…³é”®å­—æœ‰å˜åŒ–ï¼Œæ˜¯å¦æŒ‰æ–°è§„åˆ™é‡æ–°å½’ç±»æ‰€æœ‰æ”¯å‡ºï¼Ÿ')) await recategorize('all');
 };
 
-/* ============================ ×·¼ÓÔ¤Ëã ============================ */
+/* ============================ è¿½åŠ é¢„ç®— ============================ */
 function openAddBudget() {
   document.getElementById('ab-amount').value = '';
   document.getElementById('ab-note').value = '';
@@ -1033,7 +1035,7 @@ function openAddBudget() {
 document.getElementById('ab-cancel').onclick = closeSheet;
 document.getElementById('ab-save').onclick = async () => {
   const c = parseYuan(document.getElementById('ab-amount').value);
-  if (c == null || c <= 0) { toast('ÇëÊäÈë½ğ¶î'); return; }
+  if (c == null || c <= 0) { toast('è¯·è¾“å…¥é‡‘é¢'); return; }
   await putRec('budgets', {
     id: uid(), month: state.viewMonth, kind: 'add', amountCents: c,
     source: document.getElementById('ab-source').value,
@@ -1041,52 +1043,52 @@ document.getElementById('ab-save').onclick = async () => {
     seq: (await monthAdds(state.viewMonth)).length + 1,
     status: 'active', createdAt: Date.now(), voidedAt: 0
   });
-  closeSheet(); await refreshAll(); toast('ÒÑ×·¼Ó ?' + yuan(c));
+  closeSheet(); await refreshAll(); toast('å·²è¿½åŠ  Â¥' + yuan(c));
 };
 
-/* ============================ ½»Ò×ÏêÇé ============================ */
+/* ============================ äº¤æ˜“è¯¦æƒ… ============================ */
 async function openTxn(id) {
   const t = await getOne('transactions', id);
   if (!t) return;
   document.getElementById('txn-body').innerHTML =
     '<div class="big num" style="margin-bottom:8px">' + (t.direction === 'expense' ? '-' : '+') + yuan(t.amountCents) + '</div>' +
-    [['·ÖÀà', itemName(t.categoryId)], ['ÈÕÆÚ', t.date], ['ÉÌ¼Ò', t.counterparty || '-'], ['ÉÌÆ·', t.product || '-'],
-     ['À´Ô´', ({ manual: 'ÊÖ¶¯', wechat: 'Î¢ĞÅ', alipay: 'Ö§¸¶±¦' })[t.source] || t.source],
-     ['½»Ò×ÀàĞÍ', t.rawType || '-'], ['×´Ì¬', t.rawStatus || '-'], ['Ö§¸¶·½Ê½', t.payMethod || '-'],
-     ['±¸×¢', t.note || '-'], ['ÊÇ·ñÕ¼Ô¤Ëã', t.excludeFromBudget ? '²»Õ¼' : 'Õ¼']]
+    [['åˆ†ç±»', itemName(t.categoryId)], ['æ—¥æœŸ', t.date], ['å•†å®¶', t.counterparty || '-'], ['å•†å“', t.product || '-'],
+     ['æ¥æº', ({ manual: 'æ‰‹åŠ¨', wechat: 'å¾®ä¿¡', alipay: 'æ”¯ä»˜å®' })[t.source] || t.source],
+     ['äº¤æ˜“ç±»å‹', t.rawType || '-'], ['çŠ¶æ€', t.rawStatus || '-'], ['æ”¯ä»˜æ–¹å¼', t.payMethod || '-'],
+     ['å¤‡æ³¨', t.note || '-'], ['æ˜¯å¦å é¢„ç®—', t.excludeFromBudget ? 'ä¸å ' : 'å ']]
       .map(r => '<div class="between" style="padding:5px 0;border-bottom:0.5px solid var(--line)"><span class="muted">' + r[0] + '</span><span>' + esc(r[1]) + '</span></div>').join('');
   document.getElementById('txn-toggle').onclick = async () => {
     t.excludeFromBudget = t.excludeFromBudget ? 0 : 1;
     await saveTransaction(t); closeSheet(); await refreshAll();
-    toast(t.excludeFromBudget ? 'ÒÑ±ê¼ÇÎª²»Õ¼Ô¤Ëã' : 'ÒÑ»Ö¸´¼ÆÈëÔ¤Ëã');
+    toast(t.excludeFromBudget ? 'å·²æ ‡è®°ä¸ºä¸å é¢„ç®—' : 'å·²æ¢å¤è®¡å…¥é¢„ç®—');
   };
   document.getElementById('txn-del').onclick = async () => {
-    if (!confirm('É¾³ıÕâÌõ¼ÇÂ¼£¿')) return;
-    await delRec('transactions', id); closeSheet(); await refreshAll(); toast('ÒÑÉ¾³ı');
+    if (!confirm('åˆ é™¤è¿™æ¡è®°å½•ï¼Ÿ')) return;
+    await delRec('transactions', id); closeSheet(); await refreshAll(); toast('å·²åˆ é™¤');
   };
   openSheet('sheet-txn');
 }
 document.getElementById('txn-close').onclick = closeSheet;
 
-/* ============================ µ¼ÈëÁ÷³Ì ============================ */
+/* ============================ å¯¼å…¥æµç¨‹ ============================ */
 async function handleFile(file) {
-  const name = file.name || 'ÕËµ¥.csv';
-  if (/\.xlsx?$/i.test(name)) { toast('²»Ö§³Ö Excel ±í¸ñ£¬ÇëÔÚ±í¸ñÈí¼şÀïÁí´æÎª CSV UTF-8 ºóÔÙµ¼Èë'); return; }
-  if (/\.zip$/i.test(name)) { toast('ÕâÊÇÑ¹Ëõ°ü£¬ÇëÏÈ½âÑ¹³öÀïÃæµÄ CSV'); return; }
+  const name = file.name || 'è´¦å•.csv';
+  if (/\.xlsx?$/i.test(name)) { toast('ä¸æ”¯æŒ Excel è¡¨æ ¼ï¼Œè¯·åœ¨è¡¨æ ¼è½¯ä»¶é‡Œå¦å­˜ä¸º CSV UTF-8 åå†å¯¼å…¥'); return; }
+  if (/\.zip$/i.test(name)) { toast('è¿™æ˜¯å‹ç¼©åŒ…ï¼Œè¯·å…ˆè§£å‹å‡ºé‡Œé¢çš„ CSV'); return; }
   let buf;
-  try { buf = await file.arrayBuffer(); } catch (e) { toast('¶ÁÈ¡ÎÄ¼şÊ§°Ü'); return; }
+  try { buf = await file.arrayBuffer(); } catch (e) { toast('è¯»å–æ–‡ä»¶å¤±è´¥'); return; }
   const head = new Uint8Array(buf.slice(0, 4));
-  if (head[0] === 0x50 && head[1] === 0x4B) { toast('ÕâÊÇ zip/xlsx£¬ÇëÏÈ½âÑ¹³ö CSV ÔÙµ¼Èë'); return; }
+  if (head[0] === 0x50 && head[1] === 0x4B) { toast('è¿™æ˜¯ zip/xlsxï¼Œè¯·å…ˆè§£å‹å‡º CSV å†å¯¼å…¥'); return; }
   let text;
-  try { text = decodeSmart(buf); } catch (e) { toast('ÎÄ¼ş±àÂëÎŞ·¨Ê¶±ğ'); return; }
+  try { text = decodeSmart(buf); } catch (e) { toast('æ–‡ä»¶ç¼–ç æ— æ³•è¯†åˆ«'); return; }
   let parsed;
   try { parsed = parseBillText(text, state.items); }
   catch (e) {
-    if (e.code === 'NOT_BILL_CSV') toast('Ã»Ê¶±ğµ½Î¢ĞÅ/Ö§¸¶±¦ÕËµ¥±íÍ·£¬ÇëÈ·ÈÏÓÃµÄÊÇ¹Ù·½µ¼³öµÄ CSV ÇÒÃ»±»±í¸ñÈí¼ş¸Ä¹ı');
-    else toast('½âÎöÊ§°Ü£º' + e.message);
+    if (e.code === 'NOT_BILL_CSV') toast('æ²¡è¯†åˆ«åˆ°å¾®ä¿¡/æ”¯ä»˜å®è´¦å•è¡¨å¤´ï¼Œè¯·ç¡®è®¤ç”¨çš„æ˜¯å®˜æ–¹å¯¼å‡ºçš„ CSV ä¸”æ²¡è¢«è¡¨æ ¼è½¯ä»¶æ”¹è¿‡');
+    else toast('è§£æå¤±è´¥ï¼š' + e.message);
     return;
   }
-  if (!parsed.rows.length) { toast('Ã»ÓĞ½âÎö³öÓĞĞ§¼ÇÂ¼£¨¿ÉÄÜ±»×´Ì¬¹ıÂËµôÁË£©'); return; }
+  if (!parsed.rows.length) { toast('æ²¡æœ‰è§£æå‡ºæœ‰æ•ˆè®°å½•ï¼ˆå¯èƒ½è¢«çŠ¶æ€è¿‡æ»¤æ‰äº†ï¼‰'); return; }
   const plan = await planImport(parsed.rows);
   state.imp = {
     fileName: name, source: parsed.source, fresh: plan.fresh, hard: plan.hard, soft: plan.soft,
@@ -1099,20 +1101,20 @@ function renderImport() {
   const im = state.imp;
   const total = im.fresh.length + im.hard.length + im.soft.length;
   let h = '<div class="card" style="background:var(--card2)">' +
-    '<div>¹²½âÎö ' + total + ' ±Ê ¡¤ À´×Ô <b>' + (im.source === 'wechat' ? 'Î¢ĞÅ' : 'Ö§¸¶±¦') + '</b></div>' +
-    '<div class="muted">ĞÂÔö ' + im.fresh.length + ' ¡¤ Ó²ÖØ¸´ ' + im.hard.length + '£¨¶©µ¥ºÅÃüÖĞ£¬ÒÑ×Ô¶¯Ìø¹ı£©</div>' +
-    '<div class="muted">ÒÉËÆÖØ¸´ ' + im.soft.length + ' ¡¤ ÒÑ¹ıÂË ' + im.filtered.length + '</div>' +
-    (im.filtered.length ? '<div class="hint" style="margin-top:6px">¹ıÂËÔ­Òò£º' + esc([...new Set(im.filtered.map(f => f.why))].slice(0, 6).join('¡¢')) + '</div>' : '') +
+    '<div>å…±è§£æ ' + total + ' ç¬” Â· æ¥è‡ª <b>' + (im.source === 'wechat' ? 'å¾®ä¿¡' : 'æ”¯ä»˜å®') + '</b></div>' +
+    '<div class="muted">æ–°å¢ ' + im.fresh.length + ' Â· ç¡¬é‡å¤ ' + im.hard.length + 'ï¼ˆè®¢å•å·å‘½ä¸­ï¼Œå·²è‡ªåŠ¨è·³è¿‡ï¼‰</div>' +
+    '<div class="muted">ç–‘ä¼¼é‡å¤ ' + im.soft.length + ' Â· å·²è¿‡æ»¤ ' + im.filtered.length + '</div>' +
+    (im.filtered.length ? '<div class="hint" style="margin-top:6px">è¿‡æ»¤åŸå› ï¼š' + esc([...new Set(im.filtered.map(f => f.why))].slice(0, 6).join('ã€')) + '</div>' : '') +
     '</div>';
 
   h += '<div class="row" style="gap:6px;flex-wrap:wrap;margin-bottom:8px">' +
-    '<button class="btn sm" id="imp-all">È«Ñ¡</button><button class="btn sm" id="imp-none">È«²»Ñ¡</button>' +
-    '<button class="btn sm" id="imp-other">½öÑ¡´ı·ÖÀà</button></div>';
+    '<button class="btn sm" id="imp-all">å…¨é€‰</button><button class="btn sm" id="imp-none">å…¨ä¸é€‰</button>' +
+    '<button class="btn sm" id="imp-other">ä»…é€‰å¾…åˆ†ç±»</button></div>';
 
-  const opts = state.items.concat([{ id: OTHER_ID, name: 'ÆäËû' }]).map(c => '<option value="' + c.id + '">' + esc(c.name) + '</option>').join('');
+  const opts = state.items.concat([{ id: OTHER_ID, name: 'å…¶ä»–' }]).map(c => '<option value="' + c.id + '">' + esc(c.name) + '</option>').join('');
   h += '<div class="row" style="gap:6px;margin-bottom:10px"><select id="imp-cat" style="flex:1">' + opts + '</select>' +
-    '<button class="btn sm" id="imp-setcat">Ñ¡ÖĞÏîÉèÎª</button>' +
-    '<button class="btn sm" id="imp-setex">±ê¼Ç²»Õ¼Ô¤Ëã</button></div>';
+    '<button class="btn sm" id="imp-setcat">é€‰ä¸­é¡¹è®¾ä¸º</button>' +
+    '<button class="btn sm" id="imp-setex">æ ‡è®°ä¸å é¢„ç®—</button></div>';
 
   const rows = im.fresh.slice().sort((a, b) => (a.categoryId === OTHER_ID ? -1 : 0) - (b.categoryId === OTHER_ID ? -1 : 0) || b.ts - a.ts);
   const show = rows.slice(0, 300);
@@ -1121,17 +1123,17 @@ function renderImport() {
     const idx = im.fresh.indexOf(r);
     h += '<div class="item between" data-imp="' + idx + '">' +
       '<span class="row grow"><button class="sw ' + (im.sel[idx] ? 'on' : '') + '" data-sel="' + idx + '"></button>' +
-      '<span class="grow"><span class="ell" style="display:block;font-size:13px">' + esc((r.counterparty || r.product || 'Î´Öª').slice(0, 26)) + '</span>' +
-      '<span class="hint">' + r.date.slice(5) + ' ' + new Date(r.ts).toTimeString().slice(0, 5) + ' ¡¤ ' + esc(r.note || r.rawType || '') + '</span></span></span>' +
+      '<span class="grow"><span class="ell" style="display:block;font-size:13px">' + esc((r.counterparty || r.product || 'æœªçŸ¥').slice(0, 26)) + '</span>' +
+      '<span class="hint">' + r.date.slice(5) + ' ' + new Date(r.ts).toTimeString().slice(0, 5) + ' Â· ' + esc(r.note || r.rawType || '') + '</span></span></span>' +
       '<span class="num" style="margin-right:6px">' + yuan(r.amountCents) + '</span>' +
       '<span class="tag" style="background:' + (r.categoryId === OTHER_ID ? 'var(--warn-soft)' : 'var(--card2)') + ';color:' + (r.categoryId === OTHER_ID ? 'var(--warn-dark)' : 'var(--sub)') + '">' + esc(itemName(r.categoryId)) + '</span></div>';
   });
   h += '</div>';
-  if (rows.length > show.length) h += '<div class="hint" style="text-align:center">½öÏÔÊ¾Ç° ' + show.length + ' Ìõ£¬¹² ' + rows.length + ' Ìõ£¨µ¼ÈëÈ«²¿£©</div>';
+  if (rows.length > show.length) h += '<div class="hint" style="text-align:center">ä»…æ˜¾ç¤ºå‰ ' + show.length + ' æ¡ï¼Œå…± ' + rows.length + ' æ¡ï¼ˆå¯¼å…¥å…¨éƒ¨ï¼‰</div>';
   if (im.soft.length) {
-    h += '<div class="card" style="background:var(--card2)"><div class="muted">ÒÉËÆÖØ¸´ ' + im.soft.length + ' ±Ê£¨Ê±¼ä+½ğ¶î+ÉÌ¼ÒÏàÍ¬£©£¬Ä¬ÈÏ²»µ¼Èë</div>';
+    h += '<div class="card" style="background:var(--card2)"><div class="muted">ç–‘ä¼¼é‡å¤ ' + im.soft.length + ' ç¬”ï¼ˆæ—¶é—´+é‡‘é¢+å•†å®¶ç›¸åŒï¼‰ï¼Œé»˜è®¤ä¸å¯¼å…¥</div>';
     im.soft.slice(0, 50).forEach((r, i) => {
-      h += '<div class="between" style="padding:4px 0"><span class="grow hint ell">' + r.date.slice(5) + ' ' + esc((r.counterparty || r.product || '').slice(0, 20)) + ' ?' + yuan(r.amountCents) + '</span>' +
+      h += '<div class="between" style="padding:4px 0"><span class="grow hint ell">' + r.date.slice(5) + ' ' + esc((r.counterparty || r.product || '').slice(0, 20)) + ' Â¥' + yuan(r.amountCents) + '</span>' +
         '<button class="sw ' + (im.softSel[i] ? 'on' : '') + '" data-soft="' + i + '"></button></div>';
     });
     h += '</div>';
@@ -1153,23 +1155,23 @@ function renderImport() {
     const c = document.getElementById('imp-cat').value;
     let n = 0;
     im.fresh.forEach((r, i) => { if (im.sel[i]) { r.categoryId = c; n++; } });
-    toast('ÒÑ°Ñ ' + n + ' ±ÊÉèÎª¡¸' + itemName(c) + '¡¹'); renderImport();
+    toast('å·²æŠŠ ' + n + ' ç¬”è®¾ä¸ºã€Œ' + itemName(c) + 'ã€'); renderImport();
   };
   document.getElementById('imp-setex').onclick = () => {
     let n = 0;
     im.fresh.forEach((r, i) => { if (im.sel[i]) { r.excludeFromBudget = 1; n++; } });
-    toast('ÒÑ°Ñ ' + n + ' ±Ê±ê¼ÇÎª²»Õ¼Ô¤Ëã'); renderImport();
+    toast('å·²æŠŠ ' + n + ' ç¬”æ ‡è®°ä¸ºä¸å é¢„ç®—'); renderImport();
   };
 }
 document.getElementById('imp-cancel').onclick = () => { state.imp = null; closeSheet(); };
 document.getElementById('imp-confirm').onclick = async () => {
   const im = state.imp;
   const rows = im.fresh.filter((r, i) => im.sel[i]).concat(im.soft.filter((r, i) => im.softSel[i]));
-  if (!rows.length) { toast('Ã»ÓĞÑ¡ÖĞÈÎºÎ¼ÇÂ¼'); return; }
+  if (!rows.length) { toast('æ²¡æœ‰é€‰ä¸­ä»»ä½•è®°å½•'); return; }
   await commitImport(rows);
   const n = rows.length;
   state.imp = null; closeSheet();
-  toast('ÒÑµ¼Èë ' + n + ' ±Ê', '³·Ïú', () => undoLastBatch());
+  toast('å·²å¯¼å…¥ ' + n + ' ç¬”', 'æ’¤é”€', () => undoLastBatch());
 };
 async function undoLastBatch() {
   const bs = (await getAll('importBatches')).sort((a, b) => b.importedAt - a.importedAt);
@@ -1181,7 +1183,7 @@ document.getElementById('file-bill').onchange = e => {
   if (f) handleFile(f);
 };
 
-/* ============================ ±¸·İ ============================ */
+/* ============================ å¤‡ä»½ ============================ */
 async function exportBackup() {
   const dump = {
     format: 'pocket-ledger-backup', version: 1, exportedAt: Date.now(),
@@ -1195,7 +1197,7 @@ async function exportBackup() {
   const name = 'ledger-backup-' + todayStr() + '.json';
   const file = new File([blob], name, { type: 'application/json' });
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try { await navigator.share({ files: [file], title: '¼ÇÕË±¸·İ' }); await setSetting('lastBackupAt', Date.now()); return; } catch (e) { /* ÓÃ»§È¡Ïû */ }
+    try { await navigator.share({ files: [file], title: 'è®°è´¦å¤‡ä»½' }); await setSetting('lastBackupAt', Date.now()); return; } catch (e) { /* ç”¨æˆ·å–æ¶ˆ */ }
   }
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob); a.download = name; a.click();
@@ -1207,9 +1209,9 @@ document.getElementById('file-backup').onchange = async e => {
   if (!f) return;
   let dump;
   try { dump = JSON.parse(await f.text()); }
-  catch (err) { toast('²»ÊÇÓĞĞ§µÄ±¸·İÎÄ¼ş'); return; }
-  if (!dump || dump.format !== 'pocket-ledger-backup') { toast('±¸·İ¸ñÊ½²»Æ¥Åä'); return; }
-  const mode = confirm('µã¡¸È·¶¨¡¹= ºÏ²¢£¨±£ÁôÏÖÓĞÊı¾İ£©\nµã¡¸È¡Ïû¡¹= ¸²¸Ç£¨Çå¿Õºó»Ö¸´£©') ? 'merge' : 'replace';
+  catch (err) { toast('ä¸æ˜¯æœ‰æ•ˆçš„å¤‡ä»½æ–‡ä»¶'); return; }
+  if (!dump || dump.format !== 'pocket-ledger-backup') { toast('å¤‡ä»½æ ¼å¼ä¸åŒ¹é…'); return; }
+  const mode = confirm('ç‚¹ã€Œç¡®å®šã€= åˆå¹¶ï¼ˆä¿ç•™ç°æœ‰æ•°æ®ï¼‰\nç‚¹ã€Œå–æ¶ˆã€= è¦†ç›–ï¼ˆæ¸…ç©ºåæ¢å¤ï¼‰') ? 'merge' : 'replace';
   if (mode === 'replace') {
     for (const s of ['transactions', 'budgetItems', 'budgets', 'importBatches']) await clearStore(s);
   }
@@ -1222,18 +1224,18 @@ document.getElementById('file-backup').onchange = async e => {
   await bulkPut('budgets', dump.budgets || []);
   for (const s of (dump.settings || [])) await putRec('settings', s);
   await refreshAll();
-  toast('ÒÑµ¼Èë±¸·İ£ºĞÂÔö ' + add.length + ' ±Ê');
+  toast('å·²å¯¼å…¥å¤‡ä»½ï¼šæ–°å¢ ' + add.length + ' ç¬”');
 };
 
-/* ============================ ³Ö¾Ã»¯Óë°²×° ============================ */
+/* ============================ æŒä¹…åŒ–ä¸å®‰è£… ============================ */
 async function renderPersist() {
   const box = document.getElementById('persist-hint');
   if (!box) return;
   let ok = false;
   try { ok = navigator.storage && navigator.storage.persisted && await navigator.storage.persisted(); } catch (e) { }
   const last = await getSetting('lastBackupAt', 0);
-  box.innerHTML = '´æ´¢×´Ì¬£º' + (ok ? 'ÒÑ¿ªÆô³Ö¾Ã»¯±£»¤' : 'Î´»ñ³Ö¾Ã»¯£¨½¨Òé°ÑÓ¦ÓÃ×°µ½×ÀÃæ£©') +
-    '<br>ÉÏ´Î±¸·İ£º' + (last ? new Date(last).toLocaleDateString('zh-CN') : '´ÓÎ´±¸·İ');
+  box.innerHTML = 'å­˜å‚¨çŠ¶æ€ï¼š' + (ok ? 'å·²å¼€å¯æŒä¹…åŒ–ä¿æŠ¤' : 'æœªè·æŒä¹…åŒ–ï¼ˆå»ºè®®æŠŠåº”ç”¨è£…åˆ°æ¡Œé¢ï¼‰') +
+    '<br>ä¸Šæ¬¡å¤‡ä»½ï¼š' + (last ? new Date(last).toLocaleDateString('zh-CN') : 'ä»æœªå¤‡ä»½');
   if (!ok && navigator.storage && navigator.storage.persist) {
     try { await navigator.storage.persist(); } catch (e) { }
   }
@@ -1242,33 +1244,33 @@ function renderInstallBox() {
   const box = document.getElementById('install-box');
   if (!box) return;
   const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-  if (standalone) { box.innerHTML = '<div class="hint">ÒÑ°²×°µ½×ÀÃæ£¬ÀëÏß¿ÉÓÃ¡£</div>'; return; }
-  box.innerHTML = '<button class="btn block" id="btn-install">°²×°µ½×ÀÃæ</button>' +
-    '<div class="hint" style="margin-top:6px">°²×°ºó²ÅÄÜ³öÏÖÔÚÏµÍ³µÄ·ÖÏíÁĞ±íÀï£¬´ÓÓÊ¼şÒ»¼üµ¼ÈëÕËµ¥¡£</div>';
+  if (standalone) { box.innerHTML = '<div class="hint">å·²å®‰è£…åˆ°æ¡Œé¢ï¼Œç¦»çº¿å¯ç”¨ã€‚</div>'; return; }
+  box.innerHTML = '<button class="btn block" id="btn-install">å®‰è£…åˆ°æ¡Œé¢</button>' +
+    '<div class="hint" style="margin-top:6px">å®‰è£…åæ‰èƒ½å‡ºç°åœ¨ç³»ç»Ÿçš„åˆ†äº«åˆ—è¡¨é‡Œï¼Œä»é‚®ä»¶ä¸€é”®å¯¼å…¥è´¦å•ã€‚</div>';
   document.getElementById('btn-install').onclick = async () => {
     if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; }
-    else toast('ÇëÔÚä¯ÀÀÆ÷²Ëµ¥ÀïÑ¡Ôñ¡¸°²×°Ó¦ÓÃ¡¹');
+    else toast('è¯·åœ¨æµè§ˆå™¨èœå•é‡Œé€‰æ‹©ã€Œå®‰è£…åº”ç”¨ã€');
   };
 }
 let deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
 window.addEventListener('appinstalled', () => { deferredPrompt = null; renderInstallBox(); });
 
-/* ============================ ¹Ì¶¨Ä¿Â¼×Ô¶¯É¨Ãè ============================ */
+/* ============================ å›ºå®šç›®å½•è‡ªåŠ¨æ‰«æ ============================ */
 function dirSupported() { return typeof window.showDirectoryPicker === 'function'; }
 async function renderDirBox() {
   const box = document.getElementById('dir-box');
   if (!box) return;
-  if (!dirSupported()) { box.innerHTML = '<div class="hint">µ±Ç°ä¯ÀÀÆ÷²»Ö§³ÖÄ¿Â¼ÊÚÈ¨£¨Ğè Chrome 132+£©¡£Ö±½ÓÓÃ¡¸Ñ¡Ôñ CSV ÎÄ¼ş¡¹£¬»òÔÚÓÊ¼şÀï°ÑÕËµ¥¡¸·ÖÏí¡¹¸ø±¾Ó¦ÓÃ¡£</div>'; return; }
+  if (!dirSupported()) { box.innerHTML = '<div class="hint">å½“å‰æµè§ˆå™¨ä¸æ”¯æŒç›®å½•æˆæƒï¼ˆéœ€ Chrome 132+ï¼‰ã€‚ç›´æ¥ç”¨ã€Œé€‰æ‹© CSV æ–‡ä»¶ã€ï¼Œæˆ–åœ¨é‚®ä»¶é‡ŒæŠŠè´¦å•ã€Œåˆ†äº«ã€ç»™æœ¬åº”ç”¨ã€‚</div>'; return; }
   const has = await getSetting('dirHandle', null);
-  box.innerHTML = '<button class="btn block" id="btn-dir">' + (has ? 'ÖØĞÂÑ¡ÔñÕËµ¥Ä¿Â¼' : 'Ñ¡ÔñÕËµ¥Ä¿Â¼£¨´ò¿ª×Ô¶¯É¨Ãè£©') + '</button>';
+  box.innerHTML = '<button class="btn block" id="btn-dir">' + (has ? 'é‡æ–°é€‰æ‹©è´¦å•ç›®å½•' : 'é€‰æ‹©è´¦å•ç›®å½•ï¼ˆæ‰“å¼€è‡ªåŠ¨æ‰«æï¼‰') + '</button>';
   document.getElementById('btn-dir').onclick = async () => {
     try {
       const h = await window.showDirectoryPicker({ id: 'ledger-bills', mode: 'read', startIn: 'downloads' });
       await setSetting('dirHandle', h);
       await scanDir();
       renderDirBox();
-    } catch (e) { /* ÓÃ»§È¡Ïû */ }
+    } catch (e) { /* ç”¨æˆ·å–æ¶ˆ */ }
   };
 }
 async function scanDir() {
@@ -1278,7 +1280,7 @@ async function scanDir() {
   let perm = '';
   try { perm = await handle.queryPermission({ mode: 'read' }); } catch (e) { return; }
   if (perm === 'prompt') {
-    toast('ÕËµ¥Ä¿Â¼ĞèÒªÖØĞÂÊÚÈ¨', 'ÖØĞÂÊÚÈ¨', async () => {
+    toast('è´¦å•ç›®å½•éœ€è¦é‡æ–°æˆæƒ', 'é‡æ–°æˆæƒ', async () => {
       try { if (await handle.requestPermission({ mode: 'read' }) === 'granted') scanDir(); } catch (e) { }
     });
     return;
@@ -1297,7 +1299,7 @@ async function scanDir() {
     }
   } catch (e) { return; }
   if (!found.length) return;
-  toast('·¢ÏÖ ' + found.length + ' ¸öĞÂÕËµ¥ÎÄ¼ş', 'µ¼Èë', async () => {
+  toast('å‘ç° ' + found.length + ' ä¸ªæ–°è´¦å•æ–‡ä»¶', 'å¯¼å…¥', async () => {
     for (const it of found) {
       done.add(it.key);
       await handleFile(it.file);
@@ -1308,7 +1310,7 @@ async function scanDir() {
   });
 }
 
-/* ============================ ·ÖÏíÖ±´ï ============================ */
+/* ============================ åˆ†äº«ç›´è¾¾ ============================ */
 async function checkShareInbox() {
   const items = await getAll('shareInbox');
   if (!items.length) return;
@@ -1320,7 +1322,7 @@ async function checkShareInbox() {
   await handleFile(file);
 }
 
-/* ============================ Â·ÓÉÓë³õÊ¼»¯ ============================ */
+/* ============================ è·¯ç”±ä¸åˆå§‹åŒ– ============================ */
 async function refreshAll() {
   await loadItems();
   await renderHome(); await renderList(); await renderStats(); await renderSettings();
@@ -1373,33 +1375,33 @@ async function init() {
 function updateFrPreview() {
   const c = parseYuan(document.getElementById('fr-amount').value);
   const el = document.getElementById('fr-preview');
-  if (c == null || c <= 0) { el.textContent = 'ÇëÊäÈëÒ»¸ö½ğ¶î'; return; }
+  if (c == null || c <= 0) { el.textContent = 'è¯·è¾“å…¥ä¸€ä¸ªé‡‘é¢'; return; }
   const k = c / (DEFAULT_TOTAL * 100);
-  el.innerHTML = '»á°´Õâ¸ö×Ü¶îÉú³ÉÄ¬ÈÏÔ¤ËãÄ£°å£º' + DEFAULT_TEMPLATE.map(t => t.name + ' ' + (Math.round(t.amount * k / 10) * 10)).join(' ¡¤ ');
+  el.innerHTML = 'ä¼šæŒ‰è¿™ä¸ªæ€»é¢ç”Ÿæˆé»˜è®¤é¢„ç®—æ¨¡æ¿ï¼š' + DEFAULT_TEMPLATE.map(t => t.name + ' ' + (Math.round(t.amount * k / 10) * 10)).join(' Â· ');
 }
 document.getElementById('fr-amount').oninput = updateFrPreview;
 document.getElementById('fr-save').onclick = async () => {
   const c = parseYuan(document.getElementById('fr-amount').value);
-  if (c == null || c <= 0) { toast('ÇëÊäÈë½ğ¶î'); return; }
+  if (c == null || c <= 0) { toast('è¯·è¾“å…¥é‡‘é¢'); return; }
   await setSetting('monthlyTargetCents', c);
   await seedItems(c);
   await setSetting('firstRunDone', 1);
   closeSheet();
   await refreshAll();
   if (navigator.storage && navigator.storage.persist) { try { await navigator.storage.persist(); } catch (e) { } }
-  toast('ÉèÖÃÍê³É£¬µãÓÒÏÂ½Ç + ¼ÇµÚÒ»±Ê');
+  toast('è®¾ç½®å®Œæˆï¼Œç‚¹å³ä¸‹è§’ + è®°ç¬¬ä¸€ç¬”');
 };
 async function maybeBackupReminder() {
   const last = await getSetting('lastBackupAt', 0);
   const d = new Date().getDate();
   if (d <= 3 && Date.now() - last > 20 * 86400000) {
-    toast('ĞÂµÄÒ»ÔÂ£¬Òª²»Òªµ¼³öÒ»´Î±¸·İ£¿', 'µ¼³ö', exportBackup);
+    toast('æ–°çš„ä¸€æœˆï¼Œè¦ä¸è¦å¯¼å‡ºä¸€æ¬¡å¤‡ä»½ï¼Ÿ', 'å¯¼å‡º', exportBackup);
   }
 }
 
-/* ============ ¿çÁãµã / »Øµ½Ç°Ì¨×Ô¶¯ÖØ»æ ============
-   daysLeft¡¢todaySpent¡¢perDay ¶¼ÒÀÀµ¡¸½ñÌìÊÇ¼¸ºÅ¡¹¡£Ò³Ãæ³¤ÆÚÍ£ÁôÔÚºóÌ¨Ê±£¬
-   ¹ıÁËÁãµãÕâĞ©Öµ»áÍ£ÁôÔÚ×òÌì£¬¹ÊÔÚÈÕÆÚ±ä»¯Ê±´¥·¢Ò»´ÎÈ«Á¿ÖØ»æ¡£ */
+/* ============ è·¨é›¶ç‚¹ / å›åˆ°å‰å°è‡ªåŠ¨é‡ç»˜ ============
+   daysLeftã€todaySpentã€perDay éƒ½ä¾èµ–ã€Œä»Šå¤©æ˜¯å‡ å·ã€ã€‚é¡µé¢é•¿æœŸåœç•™åœ¨åå°æ—¶ï¼Œ
+   è¿‡äº†é›¶ç‚¹è¿™äº›å€¼ä¼šåœç•™åœ¨æ˜¨å¤©ï¼Œæ•…åœ¨æ—¥æœŸå˜åŒ–æ—¶è§¦å‘ä¸€æ¬¡å…¨é‡é‡ç»˜ã€‚ */
 let _renderDay = todayStr();
 function checkDayRollover() {
   const t = todayStr();
@@ -1422,7 +1424,7 @@ if ('serviceWorker' in navigator) {
       if (!nw) return;
       nw.addEventListener('statechange', () => {
         if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-          toast('·¢ÏÖĞÂ°æ±¾', 'Ë¢ĞÂ', () => location.reload());
+          toast('å‘ç°æ–°ç‰ˆæœ¬', 'åˆ·æ–°', () => location.reload());
         }
       });
     });
