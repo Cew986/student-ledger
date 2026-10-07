@@ -235,7 +235,7 @@ const pad = n => String(n).padStart(2, '0');        //padStart()，在开头用0
 const ymd = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());    //获得年-月-日
 const ym = d => d.getFullYear() + '-' + pad(d.getMonth() + 1);          //获得年-月
 const daysInMonth = (y, m) => new Date(y, m, 0).getDate();
-const uid = () => (crypto.randomUUID ? crypto.randomUUID() : 'x' + Date.now() + Math.random().toString(16).slice(2));
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : 'x' + Date.now() + Math.random().toString(16).slice(2));  //crypto.randomUUID是浏览器内置的UUID生成器，所以浏览器带就用它；Math.random，是生成[0,1)的小数;Data.now()获得当前时间戳（毫秒级），toString(16)把随机数转成16进制字符串，.slice(2)去掉开头的0.
 const todayStr = () => ymd(new Date());
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const yuan = c => (c / 100).toFixed(2);
@@ -358,14 +358,14 @@ const itemName = id => (id === OTHER_ID ? '其他' : (itemById(id) ? itemById(id
 const itemColor = id => (id === OTHER_ID ? '#9e9e9e' : (itemById(id) ? itemById(id).color : '#9e9e9e'));
 
 function categoryOf(t, items) {
-  const hay = [t.counterparty, t.product, t.rawType, t.note].join(' ').toLowerCase();
-  for (const it of items) {
-    if (!it.keywords || !it.keywords.length) continue;
-    for (const k of it.keywords) {
-      if (k && hay.indexOf(String(k).toLowerCase()) >= 0) return it.id;
+  const hay = [t.counterparty, t.product, t.rawType, t.note].join(' ').toLowerCase();       //hay是t的"交易对方 商品 交易类型 备注"。toLowerCase()，全部小写
+  for (const it of items) {                                                                 //遍历所有的items
+    if (!it.keywords || !it.keywords.length) continue;              //空就跳过
+    for (const k of it.keywords) {                                                          //遍历所有的items的keywords
+      if (k && hay.indexOf(String(k).toLowerCase()) >= 0) return it.id;                     //indexOf，查找在第几个位置，返回第一次出现的位置，否则-1。在这里意味着it的keywords有hay里的内容我就返回当前it的id
     }
   }
-  return OTHER_ID;
+  return OTHER_ID;                                                                          //如果在已有的items里没有对应的，就返回"其他"的id，见85行，OTHER_ID="other"
 }
 async function recategorize(scope) {
   const items = state.items;
@@ -529,9 +529,9 @@ function parseTime(raw) {
   return { ts: dt.getTime(), date: ymd(dt), month: ym(dt) };             //返回，ts,毫秒时间戳;date，日期;month，月份
 }
 function makeDedupKey(t) {
-  const on = String(t.orderNo || '').trim();
-  if (on) return t.source + ':' + on;
-  return [t.source, t.ts, t.amountCents, String(t.counterparty || '').trim()].join('|');
+  const on = String(t.orderNo || '').trim();                            //on是交易单号
+  if (on) return t.source + ':' + on;                                   //返回来源:交易单号
+  return [t.source, t.ts, t.amountCents, String(t.counterparty || '').trim()].join('|');            //如果交易单号为空，就返回"来源|时间戳|金额|交易对方"
 }
 function parseBillText(text, items) {
   const rows = parseCsvRows(text);              //读取出text中有效行。见239行，//返回的是rows
@@ -562,22 +562,22 @@ function parseBillText(text, items) {
     const t0 = parseTime(get(r, 'time'));                       //时间，t0是个字典{ts,date,month}
     if (!t0) { filtered.push({ row: r, why: '时间异常：' + get(r, 'time') }); continue; }
     const rec = {
-      id: uid(), source: head.source, ts: t0.ts, date: t0.date, month: t0.month,
-      direction: dirRaw === '支出' ? 'expense' : 'income',
-      amountCents: amountCents,
-      counterparty: String(get(r, 'counterparty')).trim(),
-      product: String(get(r, 'product')).trim(),
-      rawType: String(get(r, 'type')).trim(),
-      rawStatus: status,
-      payMethod: String(get(r, 'pay')).trim(),
-      orderNo: String(get(r, 'orderNo')).trim() || null,
-      merchantNo: String(get(r, 'merchantNo')).trim() || null,
-      note: String(get(r, 'note')).trim(),
-      excludeFromBudget: 0, batchId: null, createdAt: Date.now(), updatedAt: Date.now()
+      id: uid(), source: head.source, ts: t0.ts, date: t0.date, month: t0.month,        //id,来源，时间
+      direction: dirRaw === '支出' ? 'expense' : 'income',                                //支出/收入
+      amountCents: amountCents,                                                         //金额
+      counterparty: String(get(r, 'counterparty')).trim(),                              //交易对方
+      product: String(get(r, 'product')).trim(),                                        //商品
+      rawType: String(get(r, 'type')).trim(),                                           //交易类型
+      rawStatus: status,                                                                //状态
+      payMethod: String(get(r, 'pay')).trim(),                                          //支付方式
+      orderNo: String(get(r, 'orderNo')).trim() || null,                                //交易单号
+      merchantNo: String(get(r, 'merchantNo')).trim() || null,                          //商家单号
+      note: String(get(r, 'note')).trim(),                                              //备注
+      excludeFromBudget: 0, batchId: null, createdAt: Date.now(), updatedAt: Date.now()  //默认不排出预算，批次号为空，创建和更新时间戳为现在时间
     };
-    rec.categoryId = categoryOf(rec, items);
-    rec.dedupKey = makeDedupKey(rec);
-    out.push(rec);
+    rec.categoryId = categoryOf(rec, items);                                        //通过这个catagoryId来判断rec属于哪个分类
+    rec.dedupKey = makeDedupKey(rec);                                               //来确定"来源:交易单号",否则"来源|时间戳|金额|交易对方"
+    out.push(rec);                                                                  //把正常交易记录在out上
   }
   return { source: head.source, rows: out, filtered: filtered, headerIndex: head.headerIndex };
 }
