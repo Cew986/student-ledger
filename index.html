@@ -450,17 +450,17 @@ const levelOf = (used, budget) => {
 /* ============================ CSV 解析（纯函数） ============================ */
 /* ===== PURE-START ===== */
 function decodeSmart(buf) {
-  const u8 = new Uint8Array(buf);
-  const starts = b => b.every((v, i) => u8[i] === v);
-  if (starts([0xFF, 0xFE])) return new TextDecoder('utf-16le').decode(buf.slice(2));
-  if (starts([0xFE, 0xFF])) return new TextDecoder('utf-16be').decode(buf.slice(2));
-  const off = starts([0xEF, 0xBB, 0xBF]) ? 3 : 0;
-  try {
-    const s = new TextDecoder('utf-8', { fatal: true }).decode(buf.slice(off));
-    if (s.indexOf('\uFFFD') < 0) return s;
+  const u8 = new Uint8Array(buf);                                                        //Uint8Array是内置函数，buf转成无符号的整数数组(0-255)
+  const starts = b => b.every((v, i) => u8[i] === v);                                    //.every(想比对的元素,位置)，会遍历b的全部元素，只有全部相等才会返回true，看u8的i+1位置的元素是不是v
+  if (starts([0xFF, 0xFE])) return new TextDecoder('utf-16le').decode(buf.slice(2));     //小端的utf-16；TextDecoder是内置解码器，.decode是解码器的翻译动作，slice(2)是从buf的[2]位开始解码
+  if (starts([0xFE, 0xFF])) return new TextDecoder('utf-16be').decode(buf.slice(2));     //大端的utf-16；
+  const off = starts([0xEF, 0xBB, 0xBF]) ? 3 : 0;                                        //看有没有BOM(暗号)，来判断翻译往后偏移多少
+  try {                                                                                  //try：把可能出错的代码包起来，出错就跳到catch
+    const s = new TextDecoder('utf-8', { fatal: true }).decode(buf.slice(off));          //这里先用utf-8来编译；fatal:true是严格模式，遇到编码不出来的直接报错，默认是宽容模式
+    if (s.indexOf('\uFFFD') < 0) return s;                                               //'\uFFFD'就是�，这个字符本身在utf-8就有编码，所以要在这里排除，否则可能能编译，但还全是乱码
   } catch (e) { /* 非法 UTF-8，回退 GBK */ }
-  try { return new TextDecoder('gbk').decode(buf.slice(off)); }
-  catch (e) { return new TextDecoder('utf-8').decode(buf.slice(off)); }
+  try { return new TextDecoder('gbk').decode(buf.slice(off)); }                          //如果走到这一步，大概率就是gbk编码了，gbk解码本身就很宽容
+  catch (e) { return new TextDecoder('utf-8').decode(buf.slice(off)); }                  //如果gbk都报错了！那就用宽容模式的utf-8硬翻，比报错强
 }
 function parseCsvRows(text) {
   const rows = []; let row = []; let cur = ''; let inQ = false;
