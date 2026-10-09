@@ -257,42 +257,42 @@ const weekday = ds => { const d = new Date(ds.slice(0, 4), +ds.slice(5, 7) - 1, 
 /* ============================ 数据库 ============================ */
 const DB_NAME = 'pocket-ledger', DB_VERSION = 1;
 let _db = null;
-function openDB() {
-  if (_db) return Promise.resolve(_db);
+function openDB() {                                                   //打开/创建数据库，只有第一次调用才会执行后面创建，之后调用都是秒回
+  if (_db) return Promise.resolve(_db);                               //Promise.resolve(_db)即可制造一个已经完成的，值是_db的Promise对象；解释一下Promise，类似外卖，肯定有返回，但是外卖送达要时间，await就是可以不用等外卖送达，直接去做别的事，等外卖送达了再回来吃。Promise.resolve(_db)就是外卖(_db)已经送达了，直接吃就行。
   return new Promise((res, rej) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = () => {
-      const db = req.result;
-      if (!db.objectStoreNames.contains('transactions')) {
-        const s = db.createObjectStore('transactions', { keyPath: 'id' });
-        s.createIndex('by_month', 'month');
-        s.createIndex('by_date', 'date');
-        s.createIndex('by_ts', 'ts');
-        s.createIndex('by_month_ex', 'month_ex');
-        s.createIndex('by_dedup', 'dedupKey');
-        s.createIndex('by_batch', 'batchId');
+    const req = indexedDB.open(DB_NAME, DB_VERSION);                  //indexedDB是浏览器内置的数据库，open()打开/创建数据库，DB_NAME数据库名, DB_VERSION数据库版本
+    req.onupgradeneeded = () => {                                     //onupgradeneeded请求的内置事件，在数据库版本需要升级时触发
+      const db = req.result;                                          //req.result是数据库对象
+      if (!db.objectStoreNames.contains('transactions')) {            //.objectStoreNames是数据库中所有表名的集合；.contains('transactions')，判断是否包含表'transactions';如果不在，就执行下面部分
+        const s = db.createObjectStore('transactions', { keyPath: 'id' });      //.createObjectStore，创建表，表名是'transactions'，{ keyPath: 'id' }表示主键是'id'，每条记录必须有唯一的'id'；来存交易记录
+        s.createIndex('by_month', 'month');                           //下面实在建索引，这里是按月索引，索引名是'by_month'，索引字段是'month'，对字段进行索引，用索引名来索引
+        s.createIndex('by_date', 'date');                             //按日期索引，索引名是'by_date'，索引字段是'date'
+        s.createIndex('by_ts', 'ts');                                 //按时间戳索引，索引名是'by_ts'，索引字段是'ts'
+        s.createIndex('by_month_ex', 'month_ex');                     //按计入月份索引，索引名是'by_month_ex'，索引字段是'month_ex'
+        s.createIndex('by_dedup', 'dedupKey');                        //按去重指纹索引,索引名是'by_dedup'，索引字段是'dedupKey'
+        s.createIndex('by_batch', 'batchId');                         //按导入批次索引，索引名是'by_batch'，索引字段是'batchId'
       }
-      if (!db.objectStoreNames.contains('budgetItems')) {
-        const s = db.createObjectStore('budgetItems', { keyPath: 'id' });
-        s.createIndex('by_sort', 'sort');
+      if (!db.objectStoreNames.contains('budgetItems')) {             
+        const s = db.createObjectStore('budgetItems', { keyPath: 'id' });//创建了一个表'budgetItems'，主键是'id'，来存分类预算
+        s.createIndex('by_sort', 'sort');                             //按排序索引，索引名是'by_sort'，索引字段是'sort'
       }
       if (!db.objectStoreNames.contains('budgets')) {
-        const s = db.createObjectStore('budgets', { keyPath: 'id' });
-        s.createIndex('by_month', 'month');
+        const s = db.createObjectStore('budgets', { keyPath: 'id' });     //创建了一个表'budgets'，主键是'id'，来存每月预算
+        s.createIndex('by_month', 'month');                           //按月份索引，索引名是'by_month'，索引字段是'month'
       }
-      if (!db.objectStoreNames.contains('settings')) db.createObjectStore('settings', { keyPath: 'key' });
-      if (!db.objectStoreNames.contains('importBatches')) db.createObjectStore('importBatches', { keyPath: 'id' });
-      if (!db.objectStoreNames.contains('shareInbox')) db.createObjectStore('shareInbox', { keyPath: 'id' });
+      if (!db.objectStoreNames.contains('settings')) db.createObjectStore('settings', { keyPath: 'key' });          //创建表'settings'，主键是'key'，来存设置
+      if (!db.objectStoreNames.contains('importBatches')) db.createObjectStore('importBatches', { keyPath: 'id' }); //创建表'importBatches'，主键是'id'，来存导入批次
+      if (!db.objectStoreNames.contains('shareInbox')) db.createObjectStore('shareInbox', { keyPath: 'id' });       //创建表'shareInbox'，主键是'id'，来存分享的账单
     };
-    req.onsuccess = () => { _db = req.result; res(_db); };
-    req.onerror = () => rej(req.error);
+    req.onsuccess = () => { _db = req.result; res(_db); };            //成功时执行，把数据库对象赋值给_dp，告诉外面的Promise，成功了，并返回数据库
+    req.onerror = () => rej(req.error);                               //失败时执行，告诉Promise，失败了，并返回错误
   });
 }
-function wrap(r) { return new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }
-async function store(name, mode) { const db = await openDB(); return db.transaction(name, mode).objectStore(name); }
-const getAll = async n => wrap((await store(n, 'readonly')).getAll());
-const getIdx = async (n, idx, range) => wrap((await store(n, 'readonly')).index(idx).getAll(range));
-const getOne = async (n, id) => wrap((await store(n, 'readonly')).get(id));
+function wrap(r) { return new Promise((res, rej) => { r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }    //成功返回r.result，失败返回r.error
+async function store(name, mode) { const db = await openDB(); return db.transaction(name, mode).objectStore(name); }  //db.transaction(name, mode)开启一个事务（数据库的内置函数），第一个参数时表名，第二个参数是'readonly'（只读）或者'readwrite'（可读写）；objectStore（事务的内置函数），返回一个对象存储空间（表）
+const getAll = async n => wrap((await store(n, 'readonly')).getAll());                               //store(n, 'readonly')，用只读的方式打开数据库的表n并返回，await是在等表被打开，然后.getAll()，把表的所有记录拿出来，（注意这里是“拿出来”的请求），通过wrap()包装成Promise对象，返回给外面的getAll()函数
+const getIdx = async (n, idx, range) => wrap((await store(n, 'readonly')).index(idx).getAll(range));    //同样的开表，.index()，是内置的方法，按索引idx，获取表的记录，.getAll(range)是按范围再取记录
+const getOne = async (n, id) => wrap((await store(n, 'readonly')).get(id));                          //开表，.get(id)是按主键id获取记录
 const putRec = async (n, v) => { const s = await store(n, 'readwrite'); await wrap(s.put(v)); return v; };
 const delRec = async (n, id) => { const s = await store(n, 'readwrite'); await wrap(s.delete(id)); };
 const clearStore = async n => { const s = await store(n, 'readwrite'); await wrap(s.clear()); };
@@ -576,7 +576,7 @@ function parseBillText(text, items) {
       excludeFromBudget: 0, batchId: null, createdAt: Date.now(), updatedAt: Date.now()  //默认不排出预算，批次号为空，创建和更新时间戳为现在时间
     };
     rec.categoryId = categoryOf(rec, items);                                        //通过这个catagoryId来判断rec属于哪个分类
-    rec.dedupKey = makeDedupKey(rec);                                               //来确定"来源:交易单号",否则"来源|时间戳|金额|交易对方"
+    rec.dedupKey = makeDedupKey(rec);                                               //dedupKey,来确定"来源:交易单号",否则"来源|时间戳|金额|交易对方"
     out.push(rec);                                                                  //把正常交易记录在out上
   }
   return { source: head.source, rows: out, filtered: filtered, headerIndex: head.headerIndex };
@@ -584,19 +584,19 @@ function parseBillText(text, items) {
 /* ===== PURE-END ===== */
 
 /* ============================ 导入 ============================ */
-async function planImport(rows) {
-  const months = [...new Set(rows.map(r => r.month))].sort();
+async function planImport(rows) {                                   //async,函数前加async，表示这是一个异步函数；await,只能在async函数中使用，表示等待异步操作完成
+  const months = [...new Set(rows.map(r => r.month))].sort();       //先提出rows的month属性；new Set，构建元组，去重；...是把元组展开成数组；sort()，排序，刚好是时间顺序
   let exist = [];
   if (months.length) {
-    exist = await getIdx('transactions', 'by_month', IDBKeyRange.bound(months[0], months[months.length - 1]));
+    exist = await getIdx('transactions', 'by_month', IDBKeyRange.bound(months[0], months[months.length - 1]));  //IDBKeyRange，indexedDB的内置范围对象构造函数，.bound是闭区间，从最小月到最大月(在上面排过序了)。按月索引表transactions
   }
-  const seen = new Set(exist.map(x => x.dedupKey));
-  const fresh = [], hard = [], soft = [];
-  for (const r of rows) {
-    if (seen.has(r.dedupKey)) { (r.orderNo ? hard : soft).push(r); continue; }
-    seen.add(r.dedupKey); fresh.push(r);
+  const seen = new Set(exist.map(x => x.dedupKey));                 //将已有记录的dedupKey放进seen集合里。至于为什么是集合？是因为接下来要反复比对，set.has()的时间复杂度是O(1)，比数组的indexOf()的O(n)快很多。Set就是为“存在性检查”设计的
+  const fresh = [], hard = [], soft = [];                           //准备三个出口,全新(fresh)，硬重复(hard)，软重复(soft)
+  for (const r of rows) {                                           //遍历要导入的rows
+    if (seen.has(r.dedupKey)) { (r.orderNo ? hard : soft).push(r); continue; }      //如果有重复了，就看交易单号，有就放入硬重复
+    seen.add(r.dedupKey); fresh.push(r);                            //没重复就放进全新
   }
-  return { fresh, hard, soft };
+  return { fresh, hard, soft };                                     //返回三个出口
 }
 async function commitImport(rows) {
   if (!rows.length) return;
