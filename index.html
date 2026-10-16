@@ -384,8 +384,8 @@ async function recategorize(scope) {
 }
 /* 由 date 与 excludeFromBudget 派生复合索引键；所有写库路径都必须经过它 */
 function withIndexKeys(t) {
-  t.month = String(t.date).slice(0, 7);
-  t.month_ex = t.month + '|' + (t.excludeFromBudget ? 1 : 0);
+  t.month = String(t.date).slice(0, 7);                                   //slice(0, 7)截取前7位，得到年月，如2024-06
+  t.month_ex = t.month + '|' + (t.excludeFromBudget ? 1 : 0);             //(t.excludeFromBudget ? 1 : 0)默认不排出预算，看是否排除预算，0是计入预算，1是排出预算
   return t;
 }
 async function saveTransaction(t) {
@@ -598,27 +598,27 @@ async function planImport(rows) {                                   //async,函�
   }
   return { fresh, hard, soft };                                     //返回三个出口
 }
-async function commitImport(rows) {
+async function commitImport(rows) {                                 //正式落库的函数，这里用的时候rows是上面的fresh
   if (!rows.length) return;
-  const batchId = uid();
+  const batchId = uid();                                            //给这批导入的交易生成一个批次号
   const now = Date.now();
-  for (const r of rows) { r.batchId = batchId; r.createdAt = now; r.updatedAt = now; withIndexKeys(r); }
-  await bulkPut('transactions', rows);
-  await putRec('importBatches', { id: batchId, source: rows[0].source, fileName: state.imp.fileName, importedAt: now, count: rows.length, undone: 0 });
-  await refreshAll();
+  for (const r of rows) { r.batchId = batchId; r.createdAt = now; r.updatedAt = now; withIndexKeys(r); }              //withIndexKeys(r)给r加上了month和month_ex，补齐索引
+  await bulkPut('transactions', rows);                              //将rows批量写入transactions表
+  await putRec('importBatches', { id: batchId, source: rows[0].source, fileName: state.imp.fileName, importedAt: now, count: rows.length, undone: 0 });         //单条写入importBatches表(导入批次表)
+  await refreshAll();                                               //刷新页面
 }
-async function undoBatch(id) {
-  const rows = await getIdx('transactions', 'by_batch', IDBKeyRange.only(id));
-  for (const r of rows) await delRec('transactions', r.id);
-  const b = await getOne('importBatches', id);
-  if (b) await putRec('importBatches', Object.assign({}, b, { undone: 1 }));
-  toast('已撤销 ' + rows.length + ' 笔');
+async function undoBatch(id) {                                      //
+  const rows = await getIdx('transactions', 'by_batch', IDBKeyRange.only(id));      //IDBKeyRange.only(id)：只取batchId=id的交易记录
+  for (const r of rows) await delRec('transactions', r.id);                         //删除表中在rows里的交易记录
+  const b = await getOne('importBatches', id);                                      //获取导入批次表中id对应的记录
+  if (b) await putRec('importBatches', Object.assign({}, b, { undone: 1 }));        //如果有对应记录，就Object.assign({}, b, { undone: 1 })：新建对象{}，把b的属性复制进{},将undone:1覆盖原有的undone，然后再写入导入批次表。因为b是getOne返回的只读对象，所以不能直接修改。
+  toast('已撤销 ' + rows.length + ' 笔');                                            //toast，自定义函数，提示撤销了多少笔
   await refreshAll();
 }
 
 /* ============================ 提示 ============================ */
 function toast(msg, actionLabel, action) {
-  const el = document.createElement('div');
+  const el = document.createElement('div'); 
   el.className = 'toast';
   el.innerHTML = esc(msg) + (actionLabel ? ' <button>' + esc(actionLabel) + '</button>' : '');
   if (actionLabel) el.querySelector('button').onclick = () => { el.remove(); action && action(); };
